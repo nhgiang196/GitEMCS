@@ -39,11 +39,13 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label class="control-label"
-                    for="product_name">{{'VoucherComponent.ProcessDepartment' | translate}}</label>
+                    for="product_name">{{'VoucherDetailComponent.Department' | translate}}</label>
                   <!-- <input class="form-control"> -->
-
+                  <!-- [disabled]="!auth.isLabUser()" -->
                   <ng-select [items]="list.Departments" bindLabel="name" bindValue="id"
-                    [(ngModel)]="searchParams.Department" name="ProcessDepartment">
+                    [(ngModel)]="searchParams.Department" name="Department"
+
+                    >
                   </ng-select>
 
                 </div>
@@ -243,7 +245,7 @@
                     <option [value]="e.id" *ngFor="let e of list.Equipments">{{e.AssetID}}- {{e.name}}</option>
                   </select> -->
 
-                  <ng-select [items]="list.Equipments" bindLabel="name" bindValue="id" #EQID="ngModel"
+                  <ng-select [items]="list.Equipments  " bindLabel="name" bindValue="id" #EQID="ngModel"
                     [(ngModel)]="choosenEntity.EQID" name="EQID">
                   </ng-select>
 

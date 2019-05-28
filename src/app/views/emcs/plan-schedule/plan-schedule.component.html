@@ -30,7 +30,9 @@
                 <div class="form-group">
                   <label class="control-label" for="product_name"
                     i18n>{{ 'PSComponent.Department' | translate }}</label>
-                  <ng-select [items]="list.Departments" bindLabel="name" bindValue="id"
+                    <!-- [disabled]="!auth.isLabUser()" -->
+                  <ng-select   [items]="list.Departments" bindLabel="name"
+                    bindValue="id"
                     [(ngModel)]="searchParams.Department">
                   </ng-select>
 

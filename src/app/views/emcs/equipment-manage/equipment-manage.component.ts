@@ -10,7 +10,7 @@ import $ from 'jquery';
 import { MyHelperService } from 'src/app/services/my-helper.service';
 import { DataTableDirective } from 'angular-datatables';
 
-const TCode: string ='EMCS-01' // TCode for Add or Update Equipment
+const TCode: string = 'EMCS-01' // TCode for Add or Update Equipment
 
 @Component({
   selector: 'app-equipment-manage',
@@ -24,7 +24,7 @@ export class EquipmentManageComponent implements OnInit {
   InputManual: ElementRef;
   @ViewChild('myInputFile2')// set for emtpy file after Close or Reload
   InputMehod: ElementRef;
-  
+
   fileUpload = { status: '', message: '', filePath: '' };
   file: File;
   error: string;
@@ -52,13 +52,13 @@ export class EquipmentManageComponent implements OnInit {
   lsDepartment: Observable<Department[]>;
   constructor(
     private api: ApiEMCSService,
-    private authService: AuthService,
+    private auth: AuthService,
     private toastr: ToastrService,
     public helper: MyHelperService
   ) { }
 
   ngOnInit() {
-    this.authService.nagClass.emcsViewToogle = true;   
+    this.auth.nagClass.emcsViewToogle = true;
     this.resetForm();
     this.loadDepartments();
     this.fnSearch();
@@ -92,8 +92,8 @@ export class EquipmentManageComponent implements OnInit {
       ProcessDepartment: '',
       Methods: [],
       Manuals: [],
-      ProcessDeptName:'',
-      DepartmentName:''
+      ProcessDeptName: '',
+      DepartmentName: ''
     };
     this.manual = {
       FileName: '',
@@ -114,16 +114,15 @@ export class EquipmentManageComponent implements OnInit {
       MethodID: 0
     };
     this.pAssetID = '';
-    this.pDepartment = '';
+    this.pDepartment = this.auth.currentUser.Department;
     this.pEQName = '';
     this.pProcessDepartment = '';
-    this.pUserName = this.authService.currentUser.Username;
+    this.pUserName = this.auth.currentUser.Username;
     this.pGetall = false;
     this.fileName = '';
     //reset empty File
     this.InputManual.nativeElement.click();
     this.InputMehod.nativeElement.click();
-    this.fnSearch();
   }
 
   handleFileInput(files: FileList) {
@@ -132,7 +131,7 @@ export class EquipmentManageComponent implements OnInit {
 
   refreshGridView() {
     this.loading = true;
-    this.api.getAllEquipment(this.pAssetID, this.pEQName, this.pDepartment, this.pProcessDepartment, this.pUserName).subscribe(res => {
+    this.api.getAllEquipment(this.pAssetID, this.pEQName, this.pDepartment || '', this.pProcessDepartment, this.pUserName).subscribe(res => {
       this.lsEquipments = res as Equipments[];
       this.plansHeader = [];
       for (var key in this.lsEquipments[0]) {
@@ -207,7 +206,7 @@ export class EquipmentManageComponent implements OnInit {
   }
   //Download File without RestAPI
   onGetFile(FileName) {
-    let url: string = 'http://10.20.46.153:4300/api/file';
+    let url: string = '/engine-file/';
     url += '/' + FileName;
     window.open(url, '_blank');
   }
@@ -215,7 +214,7 @@ export class EquipmentManageComponent implements OnInit {
   //Internal Form
 
   fnSearch() {
-    this.pUserName = (this.pGetall == false? "": this.authService.currentUser.Username);
+    this.pUserName = (this.pGetall == false ? "" : this.auth.currentUser.Username);
     this.refreshGridView();
   }
   rerender(): void {
@@ -268,9 +267,13 @@ export class EquipmentManageComponent implements OnInit {
 
   //Save Equiment
   saveEquiment() {
+
     if (this.equipment.EQID == null) {
-      this.equipment.UserID = this.authService.currentUser.Username;
-      this.api.addEquipment(this.equipment).subscribe(res => this.messageRespone(res))
+      this.equipment.UserID = this.auth.currentUser.Username;
+      this.api.addEquipment(this.equipment).subscribe(res => {
+        this.messageRespone(res);
+        $("#closeBtn").click();
+      })
     } else {
       this.api.updateEquipment(this.equipment).subscribe(res => this.messageRespone(res))
     }

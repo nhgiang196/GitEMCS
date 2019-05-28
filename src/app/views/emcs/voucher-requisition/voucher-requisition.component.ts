@@ -61,6 +61,7 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
   disableButton: boolean;
   lang: string = this.trans.currentLang.toString()
 
+
   /************************************Init ****************************************************/
   ngOnInit() {
     this.auth.nagClass.emcsViewToogle = true; //nag-toogle
@@ -74,7 +75,8 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
       VoucherID: '', FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
     } //??
     this.fileName = '';
-    this.searchParams = { Department: '', Type: '', Year: '', Status: '' }; //search params
+    this.searchParams = { Department: this.auth.currentUser.Department , Type: '', Year: '', Status: '' }; //search params
+
     this.lsVoucher = null
     this.list = { Departments: [], Equipments: [] };//lists return after Get Data
     this.getBasic();
@@ -92,13 +94,13 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
 
   private getBasic() {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
-      if (res.length > 0) {
+      if (res.length >= 0) {
         this.list.Departments = res;
       }
       else this.toastr.error("Failed load Department", "Error");
     })
-    this.api.getBasic("Equipment", '').subscribe((res) => {
-      if (res.length > 0) {
+    this.api.getBasic("Equipment", this.auth.currentUser.Department).subscribe((res) => {
+      if (res.length >= 0) {
         this.list.Equipments = res;
         console.log(res);
       }

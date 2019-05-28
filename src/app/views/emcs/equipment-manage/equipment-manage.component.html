@@ -31,55 +31,48 @@
           </div>
         </div>
         <div class="ibox-content" id="myCollapse">
-          <div class="col-xs-3">
-            <div class="form-group">
-              <label class="control-label" for="order_id">{{ 'EQComponent.AssetID' | translate }}</label>
-              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pAssetID">
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label class="control-label" for="order_id">{{ 'EQComponent.AssetID' | translate }}</label>
+                <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pAssetID">
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label class="control-label" for="order_id">{{ 'EQComponent.EQName' | translate }}</label>
+                <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pEQName">
+              </div>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label class="control-label" for="order_id">{{ 'EQComponent.Department' | translate }}</label>
+                <!-- <ng-select [items]="list.Equipments  " bindLabel="name" bindValue="id" #EQID="ngModel"
+                      [(ngModel)]="choosenEntity.EQID" name="EQID">
+                    </ng-select> -->
+                <ng-select class="custom" [items]="lsDepartment" [(ngModel)]="pDepartment" bindLabel="Specification"
+                  bindValue="CostCenter">
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-xs-3">
             </div>
           </div>
 
-          <div class="col-xs-3">
-            <div class="form-group">
-              <label class="control-label" for="order_id">{{ 'EQComponent.EQName' | translate }}</label>
-              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pEQName">
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="checkbox">
+                <input type="checkbox" id="checkbox1" style="margin-left: 5px;" [(ngModel)]="this.pGetall">
+                <label class="control-label" for="checkbox1">
+                  {{ 'EQComponent.GetAll' | translate }}
+                </label>
+              </div>
             </div>
           </div>
 
-          <div class="col-xs-3">
-            <div class="form-group">
-              <label class="control-label" for="order_id">{{ 'EQComponent.Department' | translate }}</label>
-              <select class="form-control" [(ngModel)]="pDepartment">
-                <option value="0">{{ 'EQComponent.All' | translate }}</option>
-                <option *ngFor="let Department of lsDepartment" [ngValue]="Department.CostCenter">
-                  {{Department.Specification}}</option>
-              </select>
-              <!-- <ng-select class="custom" [items]="lsDepartment" [(ngModel)]="pDepartment" bindLabel="Specification"
-                bindValue="CostCenter">
-              </ng-select> -->
-            </div>
-          </div>
-          <div class="col-xs-3">
-            <div class="form-group">
-              <label class="control-label" for="order_id">{{ 'EQComponent.ProcessDepartment' | translate }}</label>
-              <select class="form-control" [(ngModel)]="pProcessDepartment">
-                <option value="0">All</option>
-                <option *ngFor="let Department of lsDepartment" [ngValue]="Department.CostCenter">
-                  {{Department.Specification}}</option>
-              </select>
-              <!-- <ng-select class="custom" [items]="lsDepartment" [(ngModel)]="pProcessDepartment"
-                bindLabel="Specification" bindValue="CostCenter">
-              </ng-select> -->
-
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="checkbox">
-              <input type="checkbox" id="checkbox1" style="margin-left: 5px;" [(ngModel)]="this.pGetall">
-              <label class="control-label" for="checkbox1">
-                {{ 'EQComponent.GetAll' | translate }}
-              </label>
-            </div>
-          </div>
           <div>
             <button type="button" class="btn btn-success dim " (click)="fnSearch()" data-toggle="modal">
               <i class="fa fa-search"></i> {{ 'Button.Search' | translate }}</button>
@@ -128,8 +121,8 @@
             <tbody>
               <tr *ngFor="let item of lsEquipments">
                 <td>
-                  <a [routerLink]="['/EquipmentView/',item.EQID]" ><button
-                    class="btn btn-default btn-xs"><i class="fa fa-eye"></i></button></a>
+                  <a [routerLink]="['/EquipmentView/',item.EQID]"><button class="btn btn-default btn-xs"><i
+                        class="fa fa-eye"></i></button></a>
                   <div class="btn-group">
                     <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle">
                       <i class="fa fa-list"></i><span class="caret"></span>
@@ -247,7 +240,7 @@
                 <div class="checkbox m-r-xs">
                   <input type="checkbox" value="true" class="form-control " [(ngModel)]="equipment.IsAdjust"
                     name="IsAdjust" #IsAdjust="ngModel">
-                    <label> {{ 'Button.Yes' | translate }} </label>
+                  <label> {{ 'Button.Yes' | translate }} </label>
 
 
                 </div>
@@ -351,10 +344,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-white" data-dismiss="modal"
+          <button type="button" class="btn btn-white" data-dismiss="modal" id="closeBtn"
             (click)="fnClose()">{{ 'Button.Close' | translate }}</button>
           <button type="button" class="btn btn-primary" (click)="saveEquiment()"
-            [disabled]="myForm.invalid || _checkAssetID==false">{{ 'Button.Save' | translate }}</button>
+            [disabled]="myForm.invalid || _checkAssetID==false">
+            {{ 'Button.Save' | translate }}</button>
         </div>
       </div>
     </form>

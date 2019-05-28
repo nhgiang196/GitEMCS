@@ -5,8 +5,9 @@ import { PlanTimeJob } from 'src/app/models/EMCSModels';
 import { MyHelperService } from 'src/app/services/my-helper.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { isNull } from 'util';
 
-const TCode: string ='EMCS-02' // TCode for Make Schedule
+const TCode: string = 'EMCS-02' // TCode for Make Schedule
 
 @Component({
   selector: 'app-plan-schedule',
@@ -19,7 +20,7 @@ export class PlanScheduleComponent implements OnInit {
     private api: ApiEMCSService,
     private toastr: ToastrService,
     public helperService: MyHelperService,
-    private authService: AuthService,
+    private auth: AuthService,
     private trans: TranslateService) {
   }
   /**************************************************INIT *************************************************/
@@ -33,10 +34,12 @@ export class PlanScheduleComponent implements OnInit {
   lang: string = this.trans.currentLang.toString()
 
   ngOnInit() {
-    this.authService.nagClass.emcsViewToogle = true; //nag-toogle
+
+    this.auth.nagClass.emcsViewToogle = true; //nag-toogle
     this.list = { Departments: [], Years: ['2018', '2019', '2020'] }; //lists return after Get Data
-    this.choosenEntity = { UserID: this.authService.currentUser.Username, StartTime: new Date(), }; // choosed params on edit modal page
-    this.searchParams = { Department: '', Type: '', Year: new Date().getFullYear() }; // search param
+    this.choosenEntity = { UserID: this.auth.currentUser.Username, StartTime: new Date(), }; // choosed params on edit modal page
+    this.searchParams = { Department: this.auth.currentUser.Department , Type: '', Year: new Date().getFullYear() }; // search param
+
     /** command */
     this.fnSearch();
     this.getBasic();
@@ -95,7 +98,7 @@ export class PlanScheduleComponent implements OnInit {
   }
 
   fnToogleCheck(h, index, item) {
-    if (this.actionstatus != 'M' && h.indexOf('_')>-1)
+    if (this.actionstatus != 'M' && h.indexOf('_') > -1)
       alert(this.trans.instant('PSComponent.alert_noclick'))
     else {
       this._UpdateTable(h, index)
