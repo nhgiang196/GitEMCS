@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { TranslateService } from '@ngx-translate/core';
-const NodeApiUrl = "http://10.20.46.153:4300/api/file";
+const NodeApiUrl = "/engine-file/";
 @Component({
   selector: 'app-voucher-requisition',
   templateUrl: './voucher-requisition.component.html',

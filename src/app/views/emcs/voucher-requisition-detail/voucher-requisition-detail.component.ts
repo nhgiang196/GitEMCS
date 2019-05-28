@@ -7,7 +7,7 @@ import { EngineService } from 'src/app/services/engine.service';
 import { AuthGuard } from 'src/app/services/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
 import { debug } from 'util';
-const NodeApiUrl = "http://10.20.46.153:4300/api/file";
+const NodeApiUrl = "/engine-file/";
 const TCode: string = 'EMCS-03' // TCode for Submit Voucher
 @Component({
   selector: 'app-voucher-requisition-detail',

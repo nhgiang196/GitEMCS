@@ -60,7 +60,7 @@ export class EquipmentDetailComponent implements OnInit {
 
   //Download File without RestAPI
   onGetFile(FileName) {
-    let url: string = 'http://10.20.46.153:4300/api/file';
+    let url: string = '/engine-file/';
     url += '/' + FileName;
     window.open(url, '_blank');
   }
