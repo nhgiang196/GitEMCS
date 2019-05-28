@@ -56,7 +56,7 @@ export class VoucherRequisitionDetailComponent implements OnInit {
     this.api.findVoucher(item).subscribe((res) => {
       this.Entity = res.Header[0];
       this.Entity.Profiles = res.Detail;
-
+      debugger;
       if(res.Equipment[0] != null){
         this.equipment = res.Equipment[0];
         this.equipment.Manuals =res.Manual;

@@ -1,24 +1,25 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-8">
-      <h2>Voucher</h2>
-      <ol class="breadcrumb">
-          <li>
-              <a href="index.html">Home</a>
-          </li>
-          <li>
-            Lab Equipments
-          </li>
-          <li class="active">
-              <strong> Voucher Requisition Detail</strong>
-          </li>
-      </ol>
+    <h2>Voucher</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        Lab Equipments
+      </li>
+      <li class="active">
+        <strong> Voucher Requisition Detail</strong>
+      </li>
+    </ol>
   </div>
   <div class="col-lg-4">
-      <div class="title-action">
-         <!-- show log and history here -->
-          <app-history-log [hidden]="engineApi.currentTask.id === null"></app-history-log>
-          <a style="color: white; margin-right: 20px" href="invoice_print.html" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print </a>
-      </div>
+    <div class="title-action">
+      <!-- show log and history here -->
+      <app-history-log [hidden]="engineApi.currentTask.id === null"></app-history-log>
+      <a style="color: white; margin-right: 20px" href="invoice_print.html" target="_blank" class="btn btn-primary"><i
+          class="fa fa-print"></i> Print </a>
+    </div>
   </div>
 </div>
 <div class="wrapper wrapper-content">
@@ -87,7 +88,8 @@
                   </h2>
                   <p class="mbr-fonts-style text1 mbr-text display-6">
                     <a class="mbr-fonts-style text1 mbr-text display-6"
-                      *ngFor="let item of equipment.Manuals; let i =index" (click)="onGetFile(item.FileName)">Click Here To Download Manual <br></a></p>
+                      *ngFor="let item of equipment.Manuals; let i =index" (click)="onGetFile(item.FileName)">Click Here
+                      To Download Manual <br></a></p>
                 </div>
               </div>
             </div>
@@ -104,7 +106,8 @@
                   </h2>
                   <p class="mbr-fonts-style text1 mbr-text display-6">
                     <a class="mbr-fonts-style text1 mbr-text display-6"
-                      *ngFor="let item of equipment.Methods; let i =index" (click)="onGetFile(item.FileName)">Click Here To Download Method <br></a></p>
+                      *ngFor="let item of equipment.Methods; let i =index" (click)="onGetFile(item.FileName)">Click Here
+                      To Download Method <br></a></p>
                 </div>
               </div>
             </div>
@@ -139,7 +142,7 @@
                 </tr>
                 <tr>
                   <th>{{'VoucherDetailComponent.Remark' | translate}}</th>
-                  <td  colspan="5">{{Entity.Remark}}</td>
+                  <td colspan="5">{{Entity.Remark}}</td>
                 </tr>
 
               </table>
@@ -165,10 +168,10 @@
                     <td style="text-align: left">{{item.Humidity}}</td>
                     <td style="text-align: left">{{item.Remark}}</td>
                     <td style="text-align: center">
-                      <input type="checkbox" class="i-checks" [(ngModel)]="item.Passed">
+                      <input disabled type="checkbox" class="i-checks" [(ngModel)]="item.Passed">
                     </td>
                     <td style="text-align: left;text-overflow: ellipsis; width: 200px; overflow: hidden">
-                      <a (click)="onGetFile(item.FileResult)">{{item.Name}}</a>
+                      <a (click)="onGetFile(item.FileResult)">{{item.FileResult}}</a>
                     </td>
                   </tr>
                 </tbody>
@@ -180,12 +183,18 @@
       </div>
     </div>
   </div>
-
-  <div [hidden]="engineApi.hiddenApprove">
-    <div class="pull-right">
-      <app-start-process flowKey="EMCSWorkFlow" docId={{Entity.VoucherID}} userChecklist="LeaderCheckList"></app-start-process>
+  <div class=" wrapper">
+    <div [hidden]="engineApi.hiddenApprove">
+      <div class="pull-right">
+        <app-start-process flowKey="EMCSWorkFlow" docId={{Entity.VoucherID}} userChecklist="LeaderCheckList">
+        </app-start-process>
+      </div>
+      <!-- set for list user's check -->
+      <app-check-list flowKey="EMCSWorkFlow"></app-check-list>
     </div>
-    <!-- set for list user's check -->
-    <app-check-list flowKey="EMCSWorkFlow"></app-check-list>
+
+
   </div>
+
+
 </div>
