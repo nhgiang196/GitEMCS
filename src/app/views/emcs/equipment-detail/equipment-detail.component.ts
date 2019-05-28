@@ -22,7 +22,7 @@ export class EquipmentDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.Today = this.helper.getCurrentDate(); 
+    this.Today = this.helper.getCurrentDate();
     this.Equipment = {
       EQID: null,
       AssetID: '',
@@ -44,13 +44,13 @@ export class EquipmentDetailComponent implements OnInit {
     }
     this.route.params.subscribe(params => {
       this.GetEQ(params['EQID']);
-    });    
-    
+    });
+
   }
 
 
   GetEQ(EQID: string){
-    
+
     this.api.getDetailEquipment(EQID).toPromise().then((res) => {
       this.Equipment = res.Header[0];
       this.Equipment.Manuals = res.Manuals;
@@ -60,7 +60,7 @@ export class EquipmentDetailComponent implements OnInit {
 
   //Download File without RestAPI
   onGetFile(FileName) {
-    let url: string = '/engine-file/';
+    let url: string = 'http://10.20.46.153:4300/api/file';
     url += '/' + FileName;
     window.open(url, '_blank');
   }
