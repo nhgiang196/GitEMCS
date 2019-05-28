@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   public nagClass: { mainViewToggle: boolean, emcsViewToogle: boolean }
   public currentUser: User;
+  public labID = '513901200';
   redirectUrl: string;
   constructor(private http: HttpClient, private router: Router) {
     if (this.isLoggedIn()) {
@@ -19,7 +20,7 @@ export class AuthService {
         Password: '',
         Email: '',
         Specification: '',
-        Deparment: '',
+        Department: '',
         Position: '',
         Nickname: '',
         Token: ''
@@ -35,6 +36,9 @@ export class AuthService {
   }
   isLoggedIn() {
     return localStorage.getItem('currentUser') != null;
+  }
+  isLabUser(){
+    return this.currentUser.Department == this.labID ? true: false;
   }
   logout(): void {
     localStorage.removeItem('currentUser');

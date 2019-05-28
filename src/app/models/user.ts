@@ -5,7 +5,7 @@ export class User
     Token: string;
     Email?: string;
     Specification?: string;
-    Deparment? : string;
+    Department? : string;
     Position? : string;
     Nickname? : string;
 
