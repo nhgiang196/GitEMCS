@@ -39,7 +39,7 @@ export class TaskFormComponent implements OnInit {
         // this.bonusComponent = TaskCompleteComponent; //This is bonus Component
         this.checkCondition = "IsPublish";//condition Completed              
         this.engineApi.decisionList = [{ name: 'Agree', value: 'Yes' }, { name: 'Disagree', value: 'No' }]; //List conditions in dropdownlist
-
+        this.flowKey = "EMCSWorkFlow"
         break;
       case 'UploadResultComponent':
         this.approveComponent = UpdateVoucherComponent; // detailComponent
