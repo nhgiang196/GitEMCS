@@ -43,9 +43,7 @@
                   <!-- <input class="form-control"> -->
                   <!-- [disabled]="!auth.isLabUser()" -->
                   <ng-select [items]="list.Departments" bindLabel="name" bindValue="id"
-                    [(ngModel)]="searchParams.Department" name="Department"
-
-                    >
+                    [(ngModel)]="searchParams.Department" name="Department">
                   </ng-select>
 
                 </div>
@@ -55,8 +53,8 @@
                   <label class="control-label">{{'VoucherComponent.Type' | translate}}</label>
                   <select [(ngModel)]="searchParams.Type" class=" form-control ">
                     <option value="">All</option>
-                    <option value="__">Đăng ký</option>
-                    <option value="__">Kế hoạch</option>
+                    <option value="RE">Đăng ký</option>
+                    <option value="PE">Kế hoạch</option>
                   </select>
                 </div>
               </div>
@@ -76,9 +74,12 @@
                 <div class="form-group">
                   <label class="control-label">{{'VoucherComponent.Status' | translate}}</label>
                   <select [(ngModel)]="searchParams.Status" class="form-control">
-                    <option value="" selected="">All</option>
-                    <option value="1" selected="">Enabled</option>
-                    <option value="0">Disabled</option>
+                    <option value="">All</option>
+                    <option value="N">{{'StatusN' | translate}}</option>
+                    <option value="M">{{'StatusM' | translate}}</option>
+                    <option value="S">{{'StatusS' | translate}}</option>
+                    <option value="P">{{'StatusP' | translate}}</option>
+                    <option value="X">{{'StatusX' | translate}}</option>
                   </select>
                 </div>
               </div>
@@ -141,8 +142,8 @@
                     <!-- BUTTONS -->
                     <td class="action-list">
                       <!-- routerLink="/VoucherView/?VoucherID={{item.VoucherID}}" -->
-                      <a [routerLink]="['/VoucherView/',item.VoucherID]"><button
-                          class="btn btn-default btn-xs"><i class="fa fa-eye"></i></button></a>
+                      <a [routerLink]="['/VoucherView/',item.VoucherID]"><button class="btn btn-default btn-xs"><i
+                            class="fa fa-eye"></i></button></a>
                       <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle">
                           <i class="fa fa-list"></i><span class="caret"></span>
@@ -318,13 +319,13 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">{{'VoucherComponent.Temparature' | translate}}</label>
                   <div class="col-sm-4">
-                    <input required type="number" class="form-control" [(ngModel)]="this.Profile.Temparature" name="Temparature"
-                      #Temparature="ngModel">
+                    <input required type="number" class="form-control" [(ngModel)]="this.Profile.Temparature"
+                      name="Temparature" #Temparature="ngModel">
                   </div>
                   <label class="col-sm-2 control-label">{{'VoucherComponent.Humidity' | translate}}</label>
                   <div class="col-sm-4">
-                    <input required type="number" class="form-control" [(ngModel)]="this.Profile.Humidity" name="Humidity"
-                      #Humidity="ngModel" >
+                    <input required type="number" class="form-control" [(ngModel)]="this.Profile.Humidity"
+                      name="Humidity" #Humidity="ngModel">
                   </div>
                 </div>
                 <div class="form-group">
@@ -342,7 +343,8 @@
                       <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class=" col-sm-12 btn btn-default btn-file"><span class="fileinput-new">Select file</span>
                           <span class="fileinput-exists">Change</span>
-                          <input required type="file" name="..." id="fileupload" class="col-sm-12 btn btn-default btn-file"
+                          <input required type="file" name="..." id="fileupload"
+                            class="col-sm-12 btn btn-default btn-file"
                             (change)="handleFileInput($event.target.files)" /></span>
                         <span class="fileinput-filename" [ngClass]=" {'fileinput-new': this.file == null}"
                           style="text-overflow: ellipsis; width: 200px; overflow: hidden;white-space: nowrap;">
@@ -356,8 +358,9 @@
                   <label class="col-sm-2 control-label">{{'VoucherComponent.Remark' | translate}}</label>
                   <div class="col-sm-8"><textarea type="text" class="form-control" [(ngModel)]="this.Profile.Remark"
                       name="Remark1" #Remark="ngModel"></textarea></div>
-                  <div class="col-sm-2"><button type="button form-control" class="btn btn-primary"
-                      (click)="addDetail()"  [disabled]="subForm.invalid" ><i class="fa fa-plus"></i> {{'Button.Add' | translate}}</button></div>
+                  <div class="col-sm-2"><button type="button form-control" class="btn btn-primary" (click)="addDetail()"
+                      [disabled]="subForm.invalid"><i class="fa fa-plus"></i> {{'Button.Add' | translate}}</button>
+                  </div>
                 </div>
               </form>
 

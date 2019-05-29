@@ -113,5 +113,10 @@
   "Remark": "Ghi chú",
   "Stamp": "Thời gian điều chỉnh",
   "CreateTime": "Ngày tạo",
-  "State": "Trạng thái"
+  "State": "Trạng thái",
+  "StatusN":"Mới",
+  "StatusM":"Điều chỉnh",
+  "StatusX":"Đã xóa",
+  "StatusP":"Công bố",
+  "StatusS":"Đang ký duyệt"
 }

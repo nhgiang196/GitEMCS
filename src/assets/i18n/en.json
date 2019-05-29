@@ -114,5 +114,11 @@
   "Remark": "Remark",
   "Stamp": "Stamp",
   "CreateTime": "Create Time",
-  "State": "State"
+  "State": "State",
+  "StatusN":"New",
+  "StatusM":"Modified",
+  "StatusX":"Deleted",
+  "StatusP":"Published",
+  "StatusS":"Submited"
+
 }
