@@ -35,7 +35,7 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
   dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
 
-  list: { Departments: any, Equipments: any, Data?: any }; //lists return after Get Data
+  list: { Departments: any, Equipments: any[], Data?: any }; //lists return after Get Data
   /**init */
   operationResult: any;
   Profile: Profile; // Use to add to Requisition.Profiles
@@ -75,7 +75,7 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
       VoucherID: '', FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
     } //??
     this.fileName = '';
-    this.searchParams = { Department: this.auth.currentUser.Department , Type: '', Year: '', Status: '' }; //search params
+    this.searchParams = { Department: this.auth.currentUser.Department, Type: '', Year: '', Status: '' }; //search params
 
     this.lsVoucher = null
     this.list = { Departments: [], Equipments: [] };//lists return after Get Data
@@ -101,8 +101,11 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
     })
     this.api.getBasic("Equipment", this.auth.currentUser.Department).subscribe((res) => {
       if (res.length >= 0) {
-        this.list.Equipments = res;
-        console.log(res);
+        this.list.Equipments = [];
+        res.forEach(element => {
+          if (element.Department == this.auth.currentUser.Department || this.auth.isLabUser())
+            this.list.Equipments.push(element);
+        });
       }
       else {
         this.toastr.error("Failed load Equipments", "Error");
