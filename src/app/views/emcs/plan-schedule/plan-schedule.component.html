@@ -124,22 +124,21 @@
                 <thead>
 
                   <tr style="background-color: #1cc09f">
-                    <th></th>
+                    <!-- <th></th> -->
                     <th *ngFor="let h of plansHeader">{{h.data.replace('_','')}}</th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <tr *ngFor="let item of list.Data; index as i">
-                    <td class="action-list">
-                      <!-- <button class="btn btn-default btn-xs"><i class="fa fa-eye"></i></button> -->
+                    <!-- <td class="action-list">
                       <div class="btn-group">
                         <button (click)="fnShowEdit(item)" data-target="#myModal" data-toggle="modal"
                           class="btn btn-default btn-xs dropdown-toggle">
                           <i class="fa fa-edit"></i>
                         </button>
                       </div>
-                    </td>
+                    </td> -->
                     <td *ngFor="let h of plansHeader"
                       [ngClass]="{'scheduletable': h.data.indexOf('_')>-1&&actionstatus=='M'}"
                       (click)="fnToogleCheck(h.data,i, item);">

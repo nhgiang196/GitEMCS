@@ -50,14 +50,14 @@ export class PlanScheduleComponent implements OnInit {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
       if (res.length > 0) {
         this.list.Departments = res;
-        console.log(res);
+        console.log("Get department list:",res);
       }
       else this.toastr.error("Failed load Department", "Error");
     })
     this.api.getBasic("WorkingYear", '').subscribe(res => {
       if (res.length > 0) {
         this.list.Years = res;
-        console.log(res);
+        console.log("Get working year: ",res);
       }
     })
     if (this.list.Departments == null)
@@ -76,7 +76,6 @@ export class PlanScheduleComponent implements OnInit {
     ).subscribe((res) => {
       this.list.searchYear = this.searchParams.Year;
       this.list.Data = res;
-      console.log(this.list.Data);
       this.plansHeader = [];
       for (var key in this.list.Data[0]) {
         if (['$', 'EQID'].indexOf(key) < 0) {
@@ -107,7 +106,6 @@ export class PlanScheduleComponent implements OnInit {
       }
       this.undoList.push(param);
       this.api.checkItem(param.eqid, param.month.replace('_', ''), param.year).subscribe(res => { });
-      console.log(this.undoList);
     }
   }
   fnClear() {
@@ -118,7 +116,6 @@ export class PlanScheduleComponent implements OnInit {
     this._UpdateTable(param.month, param.index)
     this.undoList.pop();
     this.api.checkItem(param.eqid, param.month.replace('_', ''), param.year).subscribe(res => { });
-    console.log(this.undoList);
   }
 
 
@@ -131,7 +128,6 @@ export class PlanScheduleComponent implements OnInit {
   fnSubmit() {
     var time = new Date(this.choosenEntity.StartTime);
     this.choosenEntity.StartTime = time.getHours().toString() + ':' + time.getMinutes().toString();
-    console.log(this.choosenEntity.StartTime);
     this.api.updateSchedulePlan(this.choosenEntity).subscribe(res => {
       var operationResult: any = res
       if (operationResult.Success) {

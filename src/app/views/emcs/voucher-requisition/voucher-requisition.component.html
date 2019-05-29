@@ -408,7 +408,7 @@
             <app-check-list flowKey={{flowKey}}></app-check-list>
           </div>
           <div class="modal-footer">
-            <button type="button" id="#closeBtn" class="btn btn-white" data-dismiss="modal">Close</button>
+            <button type="button" id="closeBtn" class="btn btn-white" data-dismiss="modal">Close</button>
             <button type="button" [hidden]="actionstatus!='View'" [disabled]="this.disableButton"
               [disabled]="myForm.invalid" (click)="fnSave()"
               class="btn btn-primary">{{'Button.Save' | translate}}</button>
