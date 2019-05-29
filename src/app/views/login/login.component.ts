@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     this.authService.login().subscribe((res: any) => {
       let current:User = res as User
       if (res.Username != null) {
-        debugger;
         localStorage.setItem('currentUser', JSON.stringify(current));
         this.authService.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.router.navigateByUrl('mainView');

@@ -186,8 +186,7 @@
   <div class=" wrapper">
     <div [hidden]="engineApi.hiddenApprove">
       <div class="pull-right">
-        <app-start-process flowKey="EMCSWorkFlow" docId={{Entity.VoucherID}} userChecklist="LeaderCheckList">
-        </app-start-process>
+        <app-start-process flowKey="EMCSWorkFlow" docId={{Entity.VoucherID}} userChecklist="LeaderCheckList"></app-start-process>
       </div>
       <!-- set for list user's check -->
       <app-check-list flowKey="EMCSWorkFlow"></app-check-list>

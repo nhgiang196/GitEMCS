@@ -45,10 +45,11 @@ export class StartProcessComponent implements OnInit {
   startProcess() {
     var myObject = {}
     myObject[this.userChecklist] = { "value": this.engineApi.lsCheckers }
+    debugger;
     //set start for Camunda
     let formHistory = {
       "variables": myObject,
-      "businessKey": this.docId
+      "businessKey": this.docId||''
     }
     this.engineApi.processDefinitionStart(this.flowKey, formHistory).subscribe(res => {
       if (res != null) {

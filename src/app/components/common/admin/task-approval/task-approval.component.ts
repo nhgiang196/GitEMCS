@@ -72,10 +72,14 @@ export class TaskApprovalComponent implements OnInit {
     //     }
     //   }
     // }
+  
 
     //Create an object to complete task
     let myCheck = {};
     myCheck[this.checkCondition] = { value: itemSelected.value }
+    if(itemSelected.value == 'No'){
+      myCheck["QCManager"] ={ value:'FEPV000166'}
+    }
     this.Params = {
       variables: myCheck
     }
