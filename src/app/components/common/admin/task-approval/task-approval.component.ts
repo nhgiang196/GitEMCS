@@ -12,16 +12,16 @@ import { Task } from 'src/app/models/camunda';
 })
 export class TaskApprovalComponent implements OnInit {
   @Input() checkCondition: any;
-  @Input() camundaTask:Task
+  @Input() camundaTask: Task
   Params: any;
   selectedValue: any;
   lsChecker: any[] = [];
-   constructor(
+  constructor(
     private api: ApiEMCSService,
     public engine: EngineService,
     private toastr: ToastrService,
-    private router: Router) { 
-    }
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.selectedValue = '';
@@ -30,6 +30,9 @@ export class TaskApprovalComponent implements OnInit {
   fnSubmit() {
     switch (this.camundaTask.formKey) {
       case "VoucherRequisitionComponent":
+        this.emcsWorkFlow();
+        break;
+      case "UploadResultComponent":
         this.emcsWorkFlow();
         break;
       default:
@@ -72,13 +75,12 @@ export class TaskApprovalComponent implements OnInit {
     //     }
     //   }
     // }
-  
 
     //Create an object to complete task
     let myCheck = {};
     myCheck[this.checkCondition] = { value: itemSelected.value }
-    if(itemSelected.value == 'No'){
-      myCheck["QCManager"] ={ value:'FEPV000166'}
+    if (itemSelected.value == 'No') {
+      myCheck["QCManager"] = { value: 'FEPV000166' }
     }
     this.Params = {
       variables: myCheck

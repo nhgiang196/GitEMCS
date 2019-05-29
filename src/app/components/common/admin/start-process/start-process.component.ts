@@ -62,7 +62,6 @@ export class StartProcessComponent implements OnInit {
           description: "demo"
         }
         this.mongoApi.createCollection(this.itemCollection).subscribe(res=>{
-          console.log(res);
         },err=>this.toastr.error(err));
         this.toastr.success('Submit Sucess!', 'Your voucher already submitted\n Thank you!');
         //after complete Task have been refresh TaskList
