@@ -20,6 +20,7 @@ export class TaskFormComponent implements OnInit {
   bonusComponent: any;
   myInjector: Injector;
   checkCondition: String;
+  flowKey: string;
   constructor(private injector: Injector, private route: ActivatedRoute, private router: Router, public engineApi: EngineService) { }
 
   ngOnInit() {
@@ -44,6 +45,7 @@ export class TaskFormComponent implements OnInit {
         this.approveComponent = UpdateVoucherComponent; // detailComponent
         this.checkCondition = "IsPublish";//condition Completed              
         this.engineApi.decisionList = [{ name: 'Agree', value: 'Yes' }, { name: 'Disagree', value: 'No' }]; //List conditions in dropdownlist
+        this.flowKey = "EMCSWorkFlow"
         break;
       default:
         break;
