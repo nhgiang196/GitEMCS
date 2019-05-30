@@ -36,12 +36,12 @@
             <div class="widget navy-bg p-lg text-center">
               <div class="m-b-md">
                 <img alt="image" class="img-circle" src="assets/img/Microscope-icon.png">
-                <h1 class="m-xs">{{equipment.Name}}</h1>
+                <h1 class="m-xs">{{list.header.Name}}</h1>
                 <h3 class="font-bold no-margins">
-                  {{equipment.AssetID}}
+                  {{list.header.AssetID}}
                 </h3>
-                <!-- <span><strong>Process Department:</strong> {{equipment.ProcessDeptName}}</span><br />
-                  <span><strong>Department:</strong> {{equipment.DepartmentName}}</span> -->
+                <!-- <span><strong>Process Department:</strong> {{list.header.ProcessDeptName}}</span><br />
+                  <span><strong>Department:</strong> {{list.header.DepartmentName}}</span> -->
 
               </div>
             </div>
@@ -55,7 +55,7 @@
                   <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">
                     {{'VoucherDetailComponent.Department' | translate}}
                   </h2>
-                  <p class="mbr-fonts-style text1 mbr-text display-6">{{equipment.DepartmentName}}</p>
+                  <p class="mbr-fonts-style text1 mbr-text display-6">{{list.header.Department}}</p>
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
                   <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">
                     {{'VoucherDetailComponent.ProcessDepartment' | translate}}
                   </h2>
-                  <p class="mbr-fonts-style text1 mbr-text display-6">{{equipment.ProcessDeptName}}</p>
+                  <p class="mbr-fonts-style text1 mbr-text display-6">{{list.header.ProcessDepartment}}</p>
                 </div>
               </div>
             </div>
@@ -88,8 +88,7 @@
                   </h2>
                   <p class="mbr-fonts-style text1 mbr-text display-6">
                     <a class="mbr-fonts-style text1 mbr-text display-6"
-                      *ngFor="let item of equipment.Manuals; let i =index" (click)="onGetFile(item.FileName)">Click Here
-                      To Download Manual <br></a></p>
+                      (click)="onGetFile(list.header.Manuals)">Click Here To Download Manual <br></a></p>
                 </div>
               </div>
             </div>
@@ -106,8 +105,7 @@
                   </h2>
                   <p class="mbr-fonts-style text1 mbr-text display-6">
                     <a class="mbr-fonts-style text1 mbr-text display-6"
-                      *ngFor="let item of equipment.Methods; let i =index" (click)="onGetFile(item.FileName)">Click Here
-                      To Download Method <br></a></p>
+                      (click)="onGetFile(list.header.MethodFile)">Click HereTo Download Method <br></a></p>
                 </div>
               </div>
             </div>
@@ -120,29 +118,29 @@
               <table class="table table-bordered">
                 <tr>
                   <th>{{'VoucherDetailComponent.VoucherID' | translate}}</th>
-                  <td>{{Entity.VoucherID}}</td>
+                  <td>{{list.header.VoucherID}}</td>
                   <th>{{'VoucherDetailComponent.Creator' | translate}}</th>
-                  <td>{{Entity.UserID}}</td>
+                  <td>{{list.header.UserID}}</td>
                   <th>{{'VoucherDetailComponent.CreateTime' | translate}}</th>
-                  <td>{{Entity.CreateTime}}</td>
+                  <td>{{list.header.CreateTime}}</td>
                 </tr>
 
                 <tr>
                   <th>{{'VoucherDetailComponent.MonthAdjust' | translate}}</th>
-                  <td>{{Entity.MonthAdjust}}</td>
+                  <td>{{list.header.MonthAdjust}}</td>
                   <th>{{'VoucherDetailComponent.YearAdjust' | translate}}</th>
-                  <td>{{Entity.YearAdjust}}</td>
+                  <td>{{list.header.YearAdjust}}</td>
                   <th>Trạng Thái Đơn</th>
-                  <td *ngIf="Entity.State =='S'">Processing</td>
-                  <td *ngIf="Entity.State =='P'">Publish</td>
-                  <td *ngIf="Entity.State =='N' || 'M'">Draft</td>
-                  <td *ngIf="Entity.State =='X'">Deleted</td>
+                  <td *ngIf="list.header.State =='S'">Processing</td>
+                  <td *ngIf="list.header.State =='P'">Publish</td>
+                  <td *ngIf="list.header.State =='N' || list.header.State=='M'">Draft</td>
+                  <td *ngIf="list.header.State =='X'">Deleted</td>
 
 
                 </tr>
                 <tr>
                   <th>{{'VoucherDetailComponent.Remark' | translate}}</th>
-                  <td colspan="5">{{Entity.Remark}}</td>
+                  <td colspan="5">{{list.header.Remark}}</td>
                 </tr>
 
               </table>
@@ -162,7 +160,7 @@
                     <th>{{'VoucherDetailComponent.FileResult' | translate}}</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of Entity.Profiles">
+                <tbody *ngFor="let item of list.detail">
                   <tr>
                     <td style="text-align: left">{{item.Temparature}}</td>
                     <td style="text-align: left">{{item.Humidity}}</td>
@@ -186,7 +184,7 @@
   <div class=" wrapper">
     <div [hidden]="engineApi.hiddenApprove">
       <div class="pull-right">
-        <app-start-process flowKey="EMCSWorkFlow" docId={{Entity.VoucherID}} userChecklist="LeaderCheckList"></app-start-process>
+        <app-start-process flowKey="EMCSWorkFlow" docId={{list.header.VoucherID}} userChecklist="LeaderCheckList"></app-start-process>
       </div>
       <!-- set for list user's check -->
       <app-check-list flowKey="EMCSWorkFlow"></app-check-list>
