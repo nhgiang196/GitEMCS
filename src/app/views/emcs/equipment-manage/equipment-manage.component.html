@@ -18,155 +18,161 @@
 
   </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <!-- <h5>Thiết bị hiệu chuẩn</h5> -->
-          <div class="ibox-tools">
-            <a class="collapse-link" data-toggle="collapse" data-parent="#accordion" href="myCollapse">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+<div class="wrapper wrapper-content">
+  <div class=" animated fadeInRight">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <!-- <h5>Thiết bị hiệu chuẩn</h5> -->
+            <div class="ibox-tools">
+              <a class="collapse-link" data-toggle="collapse" data-parent="#accordion" href="myCollapse">
+                <i class="fa fa-chevron-up"></i>
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content" id="myCollapse">
+            <div class="row">
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label class="control-label" for="order_id">{{ 'EQComponent.AssetID' | translate }}</label>
+                  <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pAssetID">
+                </div>
+              </div>
+
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label class="control-label" for="order_id">{{ 'EQComponent.EQName' | translate }}</label>
+                  <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pEQName">
+                </div>
+              </div>
+
+              <div class="col-xs-4">
+                <div class="form-group">
+                  <label class="control-label" for="order_id">{{ 'EQComponent.Department' | translate }}</label>
+                  <!-- <ng-select [items]="list.Equipments  " bindLabel="name" bindValue="id" #EQID="ngModel"
+                            [(ngModel)]="choosenEntity.EQID" name="EQID">
+                          </ng-select> -->
+                  <ng-select class="custom" [items]="lsDepartment" [(ngModel)]="pDepartment" bindLabel="name"
+                    bindValue="id"> </ng-select>
+                </div>
+              </div>
+              <div class="col-xs-3">
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="checkbox">
+                  <input type="checkbox" id="checkbox1" style="margin-left: 5px;" [(ngModel)]="this.pGetall">
+                  <label class="control-label" for="checkbox1">
+                    {{ 'EQComponent.GetAll' | translate }}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button type="button" class="btn btn-success dim " (click)="fnSearch()" data-toggle="modal">
+                <i class="fa fa-search"></i> {{ 'Button.Search' | translate }}</button>
+              <button type="button" class="btn btn-primary dim " (click)="fnAdd()" data-toggle="modal"
+                data-target="#myModal">
+                <i class="fa fa-plus"></i> {{ 'Button.Add' | translate }}</button>
+            </div>
           </div>
         </div>
-        <div class="ibox-content" id="myCollapse">
-          <div class="row">
-            <div class="col-xs-3">
-              <div class="form-group">
-                <label class="control-label" for="order_id">{{ 'EQComponent.AssetID' | translate }}</label>
-                <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pAssetID">
-              </div>
-            </div>
+      </div>
+    </div>
+    <div class="row">
 
-            <div class="col-xs-3">
-              <div class="form-group">
-                <label class="control-label" for="order_id">{{ 'EQComponent.EQName' | translate }}</label>
-                <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pEQName">
-              </div>
-            </div>
-
-            <div class="col-xs-4">
-              <div class="form-group">
-                <label class="control-label" for="order_id">{{ 'EQComponent.Department' | translate }}</label>
-                <!-- <ng-select [items]="list.Equipments  " bindLabel="name" bindValue="id" #EQID="ngModel"
-                      [(ngModel)]="choosenEntity.EQID" name="EQID">
-                    </ng-select> -->
-                <ng-select class="custom" [items]="lsDepartment" [(ngModel)]="pDepartment" bindLabel="name"
-                  bindValue="id"> </ng-select>
-              </div>
-            </div>
-            <div class="col-xs-3">
-            </div>
+      <div class="col-lg-12">
+        <div class="ibox-content">
+          <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
           </div>
-
-
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="checkbox">
-                <input type="checkbox" id="checkbox1" style="margin-left: 5px;" [(ngModel)]="this.pGetall">
-                <label class="control-label" for="checkbox1">
-                  {{ 'EQComponent.GetAll' | translate }}
-                </label>
-              </div>
+          <div class="ibox-title">
+            <h5>Thiết bị hiệu chuẩn</h5>
+            <div class="ibox-tools">
+              <a class="collapse-link" data-toggle="collapse" data-parent="#accordion" href="myCollapse2">
+                <i class="fa fa-chevron-up"></i>
+              </a>
             </div>
-          </div>
 
-          <div>
-            <button type="button" class="btn btn-success dim " (click)="fnSearch()" data-toggle="modal">
-              <i class="fa fa-search"></i> {{ 'Button.Search' | translate }}</button>
-            <button type="button" class="btn btn-primary dim " (click)="fnAdd()" data-toggle="modal"
-              data-target="#myModal">
-              <i class="fa fa-plus"></i> {{ 'Button.Add' | translate }}</button>
+          </div>
+          <div class="ibox-content" id="myCollapse2">
+            <div class="table-responsive">
+              <table datatable [dtOptions]="helper.dtOptions" [dtTrigger]="dtTrigger"
+                class="table table-bordered table-hover table-stripped table-responisve text-center">
+                <thead>
+                  <tr>
+                    <th>{{ 'Button.Action' | translate }}</th>
+                    <th>{{ 'EQComponent.AssetID' | translate }}</th>
+                    <th>{{ 'EQComponent.Name' | translate }}</th>
+                    <th>{{ 'EQComponent.Brand' | translate }}</th>
+                    <th>{{ 'EQComponent.Model' | translate }}</th>
+                    <th>{{ 'EQComponent.AdjustType' | translate }}</th>
+                    <th>{{ 'EQComponent.Frequency' | translate }}</th>
+                    <th>{{ 'EQComponent.Department' | translate }}</th>
+                    <th>{{ 'EQComponent.ProcessDepartment' | translate }}</th>
+                    <th>{{ 'EQComponent.UsedDate' | translate }}</th>
+                    <th>{{ 'EQComponent.Author' | translate }}</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of lsEquipments">
+                    <td>
+                      <a [routerLink]="['/EquipmentView/',item.EQID]"><button class="btn btn-default btn-xs"><i
+                            class="fa fa-eye"></i></button></a>
+                      <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle">
+                          <i class="fa fa-list"></i><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a data-target="#myModal" data-toggle="modal" (click)="fnEdit(item)">Modify</a></li>
+                          <li><a [swal]="
+                                  {
+                                    title: 'Are you sure?',
+                                    text: '_text_!',
+                                    type: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#DD6B55',
+                                     confirmButtonText: 'Yes, delete it!',
+                                    closeOnConfirm: false
+                                  }" (confirm)="fnDelete(item)">Delete</a></li>
+                          <li class="divider"></li>
+                          <li><a>Others...</a></li>
+                        </ul>
+                      </div>
+
+                    </td>
+                    <td>{{item.AssetID}}</td>
+                    <td style="text-align: left">{{item.Name}}</td>
+                    <td>{{item.Brand}}</td>
+                    <td>{{item.Model}}</td>
+                    <td>{{item.AdjustType}}</td>
+                    <td>{{item.Frequency}}</td>
+                    <td>{{item.Department}}</td>
+                    <td>{{item.ProcessDepartment}}</td>
+                    <td>{{item.UsedDate}}</td>
+                    <td>{{item.UserID}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox-content">
-        <div class="sk-spinner sk-spinner-wave">
-          <div class="sk-rect1"></div>
-          <div class="sk-rect2"></div>
-          <div class="sk-rect3"></div>
-          <div class="sk-rect4"></div>
-          <div class="sk-rect5"></div>
-        </div>
-        <div class="ibox-title">
-          <h5>Thiết bị hiệu chuẩn</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link" data-toggle="collapse" data-parent="#accordion" href="myCollapse2">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-          </div>
 
-        </div>
-        <div class="ibox-content" id="myCollapse2">
-
-          <table datatable [dtOptions]="helper.dtOptions" [dtTrigger]="dtTrigger"
-            class="table table-bordered table-hover table-stripped table-responisve text-center">
-            <thead>
-              <tr>
-                <th>{{ 'Button.Action' | translate }}</th>
-                <th>{{ 'EQComponent.AssetID' | translate }}</th>
-                <th>{{ 'EQComponent.Name' | translate }}</th>
-                <th>{{ 'EQComponent.Brand' | translate }}</th>
-                <th>{{ 'EQComponent.Model' | translate }}</th>
-                <th>{{ 'EQComponent.AdjustType' | translate }}</th>
-                <th>{{ 'EQComponent.Department' | translate }}</th>
-                <th>{{ 'EQComponent.ProcessDepartment' | translate }}</th>
-                <th>{{ 'EQComponent.UsedDate' | translate }}</th>
-                <th>{{ 'EQComponent.Author' | translate }}</th>
-
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of lsEquipments">
-                <td>
-                  <a [routerLink]="['/EquipmentView/',item.EQID]"><button class="btn btn-default btn-xs"><i
-                        class="fa fa-eye"></i></button></a>
-                  <div class="btn-group">
-                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle">
-                      <i class="fa fa-list"></i><span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a data-target="#myModal" data-toggle="modal" (click)="fnEdit(item)">Modify</a></li>
-                      <li><a [swal]="
-                          {
-                            title: 'Are you sure?',
-                            text: '_text_!',
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#DD6B55',
-                             confirmButtonText: 'Yes, delete it!',
-                            closeOnConfirm: false
-                          }" (confirm)="fnDelete(item)">Delete</a></li>
-                      <li class="divider"></li>
-                      <li><a>Others...</a></li>
-                    </ul>
-                  </div>
-
-                </td>
-                <td>{{item.AssetID}}</td>
-                <td style="text-align: left">{{item.Name}}</td>
-                <td>{{item.Brand}}</td>
-                <td>{{item.Model}}</td>
-                <td>{{item.AdjustType}}</td>
-                <td>{{item.Department}}</td>
-                <td>{{item.ProcessDepartment}}</td>
-                <td>{{item.UsedDate}}</td>
-                <td>{{item.UserID}}</td>
-
-
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Modal Diaglog -->
@@ -224,8 +230,8 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="order_id">{{ 'EQComponent.Department' | translate }}</label>
-                <ng-select [items]="lsDepartment" bindLabel="name" bindValue="id"
-                  [(ngModel)]="equipment.Department" name="Department">
+                <ng-select [items]="lsDepartment" bindLabel="name" bindValue="id" [(ngModel)]="equipment.Department"
+                  name="Department">
                 </ng-select>
               </div>
             </div>
@@ -251,15 +257,15 @@
                   <div class="radio">
                     <input type="radio" name="AdjustType" id="AdjustType1" value="I" [(ngModel)]="equipment.AdjustType"
                       checked="">
-                    <label for="AdjustType1"> I </label>
+                    <label for="AdjustType1">  {{'EQComponent.AdjustType_I' | translate}} </label>
                   </div>
                   <div class="radio">
                     <input type="radio" name="AdjustType" id="AdjustType2" value="N" [(ngModel)]="equipment.AdjustType">
-                    <label for="AdjustType2">N </label>
+                    <label for="AdjustType2">  {{'EQComponent.AdjustType_N' | translate}} </label>
                   </div>
                   <div class="radio">
-                    <input type="radio" name="AdjustType" id="AdjustType3" value="O" [(ngModel)]="equipment.AdjustType">
-                    <label for="AdjustType3"> O </label>
+                    <input type="radio" name="AdjustType" id="AdjustType3" value="`O" [(ngModel)]="equipment.AdjustType">
+                    <label for="AdjustType3"> {{'EQComponent.AdjustType_O' | translate}}  </label>
                   </div>
 
 
@@ -274,15 +280,15 @@
                 <div class="checkbox m-r-xs">
                   <div class="radio">
                     <input type="radio" name="Frequency" id="Frequency1" value="3" [(ngModel)]="equipment.Frequency">
-                    <label for="Frequency1">3 </label>
+                    <label for="Frequency1">3  {{'Month'| translate}}   </label>
                   </div>
                   <div class="radio">
                     <input type="radio" name="Frequency" id="Frequency2" value="6" [(ngModel)]="equipment.Frequency">
-                    <label for="Frequency2">6 </label>
+                    <label for="Frequency2">6   {{'Month'| translate}}  </label>
                   </div>
                   <div class="radio">
                     <input type="radio" name="Frequency" id="Frequency3" value="12" [(ngModel)]="equipment.Frequency">
-                    <label for="Frequency3">12</label>
+                    <label for="Frequency3">12  {{'Month'| translate}} </label>
                   </div>
 
                 </div>
@@ -386,7 +392,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-white" data-dismiss="modal" id="closeBtn">{{ 'Button.Close' | translate }}</button>
+          <button type="button" class="btn btn-white" data-dismiss="modal"
+            id="closeBtn">{{ 'Button.Close' | translate }}</button>
           <button type="button" class="btn btn-primary" (click)="saveEquiment()"
             [disabled]="myForm.invalid || _checkAssetID==false">
             {{ 'Button.Save' | translate }}</button>

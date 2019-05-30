@@ -45,7 +45,11 @@
     "Author": "Author",
     "UsedDate": "Used Date",
     "Model": "Model",
-    "IsAdjust": "Type of Adjust",
+    "AdjustType": "Type of Adjust",
+    "AdjustType_N": "TB có hiệu chuẩn",
+    "AdjustType_I": "TB không hiệu chuẩn",
+    "AdjustType_O": "Hiệu chuẩn ngoài",
+    "Frequency":"Frequency",
     "Remark": "Remark",
     "UploadFileManual": "Upload File Manual",
     "UploadFileMethod": "Upload File Method",
@@ -120,5 +124,4 @@
   "StatusX":"Deleted",
   "StatusP":"Published",
   "StatusS":"Submited"
-
 }

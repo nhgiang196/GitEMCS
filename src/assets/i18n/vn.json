@@ -45,6 +45,10 @@
     "UsedDate": "Ngày sử dụng",
     "Model": "Kiểu dáng",
     "AdjustType": "Kiểu hiệu chuẩn",
+    "AdjustType_N": "TB có hiệu chuẩn",
+    "AdjustType_I": "TB không hiệu chuẩn",
+    "AdjustType_O": "Hiệu chuẩn ngoài",
+    "Frequency":"Tần suất",
     "Remark": "Ghi Chú",
     "UploadFileManual": "Tải lên tệp hướng dẫn sử dụng",
     "UploadFileMethod": "Tải lên tệp phương thức hiệu chuẩn",
@@ -118,5 +122,6 @@
   "StatusM":"Điều chỉnh",
   "StatusX":"Đã xóa",
   "StatusP":"Công bố",
-  "StatusS":"Đang ký duyệt"
+  "StatusS":"Đang ký duyệt",
+  "Month":"Tháng"
 }
