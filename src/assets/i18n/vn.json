@@ -44,7 +44,7 @@
     "Author": "Người tạo",
     "UsedDate": "Ngày sử dụng",
     "Model": "Kiểu dáng",
-    "IsAdjust": "Thiết Bị Cần Hiệu Chuẩn",
+    "AdjustType": "Kiểu hiệu chuẩn",
     "Remark": "Ghi Chú",
     "UploadFileManual": "Tải lên tệp hướng dẫn sử dụng",
     "UploadFileMethod": "Tải lên tệp phương thức hiệu chuẩn",

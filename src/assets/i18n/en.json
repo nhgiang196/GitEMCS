@@ -45,7 +45,7 @@
     "Author": "Author",
     "UsedDate": "Used Date",
     "Model": "Model",
-    "IsAdjust": "Is Adjust",
+    "IsAdjust": "Type of Adjust",
     "Remark": "Remark",
     "UploadFileManual": "Upload File Manual",
     "UploadFileMethod": "Upload File Method",
