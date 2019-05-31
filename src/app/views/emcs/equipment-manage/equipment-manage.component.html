@@ -257,15 +257,16 @@
                   <div class="radio">
                     <input type="radio" name="AdjustType" id="AdjustType1" value="I" [(ngModel)]="equipment.AdjustType"
                       checked="">
-                    <label for="AdjustType1">  {{'EQComponent.AdjustType_I' | translate}} </label>
+                    <label for="AdjustType1"> {{'EQComponent.AdjustType_I' | translate}} </label>
                   </div>
                   <div class="radio">
                     <input type="radio" name="AdjustType" id="AdjustType2" value="N" [(ngModel)]="equipment.AdjustType">
-                    <label for="AdjustType2">  {{'EQComponent.AdjustType_N' | translate}} </label>
+                    <label for="AdjustType2"> {{'EQComponent.AdjustType_N' | translate}} </label>
                   </div>
                   <div class="radio">
-                    <input type="radio" name="AdjustType" id="AdjustType3" value="`O" [(ngModel)]="equipment.AdjustType">
-                    <label for="AdjustType3"> {{'EQComponent.AdjustType_O' | translate}}  </label>
+                    <input type="radio" name="AdjustType" id="AdjustType3" value="`O"
+                      [(ngModel)]="equipment.AdjustType">
+                    <label for="AdjustType3"> {{'EQComponent.AdjustType_O' | translate}} </label>
                   </div>
 
 
@@ -277,22 +278,9 @@
             <div class="col-sm-3">
               <div class="form-group">
                 <label class="control-label" for="order_id">{{ 'EQComponent.Frequency' | translate }}</label>
-                <div class="checkbox m-r-xs">
-                  <div class="radio">
-                    <input type="radio" name="Frequency" id="Frequency1" value="3" [(ngModel)]="equipment.Frequency">
-                    <label for="Frequency1">3  {{'Month'| translate}}   </label>
-                  </div>
-                  <div class="radio">
-                    <input type="radio" name="Frequency" id="Frequency2" value="6" [(ngModel)]="equipment.Frequency">
-                    <label for="Frequency2">6   {{'Month'| translate}}  </label>
-                  </div>
-                  <div class="radio">
-                    <input type="radio" name="Frequency" id="Frequency3" value="12" [(ngModel)]="equipment.Frequency">
-                    <label for="Frequency3">12  {{'Month'| translate}} </label>
-                  </div>
-
-                </div>
-
+                <select [(ngModel)]="equipment.Frequency" class="form-control form-control">
+                  <option *ngFor="let num of  [].constructor(12); let i = index" [value]="i+1"> {{i+1}} {{'Month'| translate}}</option>
+                </select>
 
               </div>
             </div>

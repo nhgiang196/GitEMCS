@@ -132,7 +132,7 @@ export class EquipmentManageComponent implements OnInit {
       , this.lang
     ).subscribe(res => {
       this.lsEquipments = res as Equipments[];
-      debugger;
+
       // Calling the DT trigger to manually render the table
       this.loading = false;
       /** Render */
