@@ -32,15 +32,13 @@ export class EquipmentDetailComponent implements OnInit {
       UsedDate: null,
       Stamp: null,
       UserID: '',
-      IsAdjust: null,
+      AdjustType : 'I',
       State: '',
       Remark: '',
       Department: '',
       ProcessDepartment: '',
       Manuals: [],
       Methods:[],
-      DepartmentName:'',
-      ProcessDeptName:''
     }
     this.route.params.subscribe(params => {
       this.GetEQ(params['EQID']);
