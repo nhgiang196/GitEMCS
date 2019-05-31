@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Requisition, Equipments, Manual } from 'src/app/models/EMCSModels';
 
 import { ApiEMCSService } from 'src/app/services/api-ecms.service';
@@ -9,12 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 const NodeApiUrl = "/engine-file/";
 const TCode: string = 'EMCS-03' // TCode for Submit Voucher
 @Component({
-  selector: 'app-voucher-requisition-detail',
-  templateUrl: './voucher-requisition-detail.component.html',
-  styleUrls: ['./voucher-requisition-detail.component.css']
+  selector: 'app-voucher-detail',
+  templateUrl: './voucher-detail.component.html',
+  styleUrls: ['./voucher-detail.component.css']
 })
-export class VoucherRequisitionDetailComponent implements OnInit {
+export class VoucherDetailComponent implements OnInit {
 
+  @Input() voucherid: any;
   constructor(
     private api: ApiEMCSService,
     private route: ActivatedRoute,
@@ -27,8 +28,9 @@ export class VoucherRequisitionDetailComponent implements OnInit {
   ngOnInit() {
     this.list = {header: {}, detail:[]};
     this.auth.checkTcode(TCode).subscribe(res=> this.isValidTCode = res)
+    debugger;
     this.route.params.subscribe(params => {
-      this.fnGetDetail(params['businessKey']);
+      this.fnGetDetail(this.voucherid || params['businessKey']);
     });
   }
   //Download Manual, Method File

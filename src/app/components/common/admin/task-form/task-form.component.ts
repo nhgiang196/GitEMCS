@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MyTaskInjector } from 'src/app/helpers/MyTaskInjector';
 
 import { Task } from 'src/app/models/camunda';
-import { VoucherRequisitionDetailComponent } from 'src/app/views/emcs/voucher-requisition-detail/voucher-requisition-detail.component';
+import { VoucherDetailComponent } from 'src/app/views/emcs/voucher-detail/voucher-detai.component';
 import { EngineService } from 'src/app/services/engine.service';
 import { TaskCompleteComponent } from '../task-complete/task-complete.component';
 import { UpdateVoucherComponent } from 'src/app/views/emcs/update-voucher/update-voucher.component';
@@ -35,15 +35,15 @@ export class TaskFormComponent implements OnInit {
   loadComponent() {
     switch (this.taskCurrent.formKey) {
       case 'VoucherRequisitionComponent':
-        this.approveComponent = VoucherRequisitionDetailComponent; // detailComponent
+        this.approveComponent = VoucherDetailComponent; // detailComponent
         // this.bonusComponent = TaskCompleteComponent; //This is bonus Component
-        this.checkCondition = "IsPublish";//condition Completed              
+        this.checkCondition = "IsPublish";//condition Completed
         this.engineApi.decisionList = [{ name: 'Agree', value: 'Yes' }, { name: 'Disagree', value: 'No' }]; //List conditions in dropdownlist
         this.flowKey = "EMCSWorkFlow"
         break;
       case 'UploadResultComponent':
         this.approveComponent = UpdateVoucherComponent; // detailComponent
-        this.checkCondition = "IsPublish";//condition Completed              
+        this.checkCondition = "IsPublish";//condition Completed
         this.engineApi.decisionList = [{ name: 'Agree', value: 'Yes' }]; //List conditions in dropdownlist
         this.flowKey = "EMCSWorkFlow"
         break;
