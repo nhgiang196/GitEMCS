@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ApiEMCSService } from 'src/app/services/api-ecms.service';
 import { Task } from 'src/app/models/camunda';
+import { MongoApiService } from 'src/app/services/mongo-api.service';
 
 @Component({
   selector: 'app-task-approval',
@@ -20,6 +21,7 @@ export class TaskApprovalComponent implements OnInit {
     private api: ApiEMCSService,
     public engine: EngineService,
     private toastr: ToastrService,
+    private mongo:MongoApiService,
     private router: Router) {
   }
 
@@ -28,6 +30,7 @@ export class TaskApprovalComponent implements OnInit {
   }
 
   fnSubmit() {
+    debugger;
     switch (this.camundaTask.formKey) {
       case "VoucherRequisitionComponent":
         this.emcsWorkFlow();
@@ -80,7 +83,11 @@ export class TaskApprovalComponent implements OnInit {
     let myCheck = {};
     myCheck[this.checkCondition] = { value: itemSelected.value }
     if (itemSelected.value == 'No') {
-      myCheck["QCManager"] = { value: 'FEPV000166' }
+      this.mongo.findCollection({ voucherId: this.camundaTask.businessKey }).subscribe(res=>{
+       let r = res as any;
+        myCheck["QCManager"] = { value: r.initiator|| '' }
+      })
+
     }
     this.Params = {
       variables: myCheck

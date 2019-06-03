@@ -28,7 +28,6 @@ export class VoucherDetailComponent implements OnInit {
   ngOnInit() {
     this.list = {header: {}, detail:[]};
     this.auth.checkTcode(TCode).subscribe(res=> this.isValidTCode = res)
-    debugger;
     this.route.params.subscribe(params => {
       this.fnGetDetail(this.voucherid || params['businessKey']);
     });

@@ -182,7 +182,7 @@
     </div>
   </div>
   <div class=" wrapper">
-    <div [hidden]="list.header.State!='S' || list.header.State!='P'">
+    <div [hidden]="list.header.State=='S' || list.header.State=='P'">
       <div class="pull-right">
         <app-start-process flowKey="EMCSWorkFlow" docId={{list.header.VoucherID}} userChecklist="LeaderCheckList">
         </app-start-process>
@@ -190,8 +190,6 @@
       <!-- set for list user's check -->
       <app-check-list flowKey="EMCSWorkFlow"></app-check-list>
     </div>
-
-
   </div>
 
 

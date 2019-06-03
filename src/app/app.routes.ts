@@ -18,9 +18,9 @@ import { VoucherRequisitionComponent } from './views/emcs/voucher-requisition/vo
 import { DiagramComponent } from './components/common/admin/diagram/diagram.component';
 import { MainViewComponent } from './views/main-view/main-view.component';
 import { EquipmentManageComponent } from './views/emcs/equipment-manage/equipment-manage.component';
-import { VoucherRequisitionDetailComponent } from './views/emcs/voucher-requisition-detail/voucher-requisition-detail.component';
 import { EquipmentDetailComponent } from './views/emcs/equipment-detail/equipment-detail.component';
 import { NotFoundComponent } from './components/common/admin/not-found/not-found.component';
+import { VoucherDetailComponent } from './views/emcs/voucher-detail/voucher-detai.component';
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -46,7 +46,7 @@ export const ROUTES: Routes = [
       { path: 'planScheduleView', component: PlanScheduleComponent, canActivate: [AuthGuard] },
       { path: 'voucherRequisitionView', component: VoucherRequisitionComponent, canActivate: [AuthGuard] },
       { path: 'EquipmentView/:EQID', component: EquipmentDetailComponent },//Open detail form Approve by Key
-      { path: 'VoucherView/:businessKey', component: VoucherRequisitionDetailComponent }//Open detail form Approve by Key
+      { path: 'VoucherView/:businessKey', component: VoucherDetailComponent }//Open detail form Approve by Key
 
     ]
   },
