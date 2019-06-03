@@ -21,7 +21,7 @@ export class TaskApprovalComponent implements OnInit {
     private api: ApiEMCSService,
     public engine: EngineService,
     private toastr: ToastrService,
-    private mongo:MongoApiService,
+    private mongo: MongoApiService,
     private router: Router) {
   }
 
@@ -30,7 +30,6 @@ export class TaskApprovalComponent implements OnInit {
   }
 
   fnSubmit() {
-    debugger;
     switch (this.camundaTask.formKey) {
       case "VoucherRequisitionComponent":
         this.emcsWorkFlow();
@@ -82,16 +81,24 @@ export class TaskApprovalComponent implements OnInit {
     //Create an object to complete task
     let myCheck = {};
     myCheck[this.checkCondition] = { value: itemSelected.value }
-    if (itemSelected.value == 'No') {
-      this.mongo.findCollection({ voucherId: this.camundaTask.businessKey }).subscribe(res=>{
-       let r = res as any;
-        myCheck["QCManager"] = { value: r.initiator|| '' }
-      })
-
-    }
     this.Params = {
       variables: myCheck
     }
+    if (itemSelected.value == 'No') {
+      this.mongo.findCollection({ voucherId: this.camundaTask.businessKey }).subscribe(res => {
+        let r = res as any;
+        myCheck["QCManager"] = { value: r[0].initiator }
+        this.submitCamunda();
+
+      })
+    }else{
+      this.submitCamunda();
+
+    }
+
+  }
+
+  submitCamunda() {
     this.engine.completeTask(this.camundaTask.id, this.Params).subscribe(res => {
       if (res === null || res === '') {
         this.toastr.success('Task Complete!', 'Your task already submitted\n Thank you!');
@@ -104,6 +111,7 @@ export class TaskApprovalComponent implements OnInit {
         this.toastr.error('Error!', 'Your task did not submit\n Please try again!');
       }
     })
+
   }
 
 }
