@@ -20,7 +20,7 @@ import { MainViewComponent } from './views/main-view/main-view.component';
 import { EquipmentManageComponent } from './views/emcs/equipment-manage/equipment-manage.component';
 import { EquipmentDetailComponent } from './views/emcs/equipment-detail/equipment-detail.component';
 import { NotFoundComponent } from './components/common/admin/not-found/not-found.component';
-import { VoucherDetailComponent } from './views/emcs/voucher-detail/voucher-detai.component';
+import { VoucherDetailComponent } from './views/emcs/voucher-detail/voucher-detail.component';
 
 export const ROUTES: Routes = [
   // Main redirect
