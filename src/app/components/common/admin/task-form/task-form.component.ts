@@ -42,7 +42,8 @@ export class TaskFormComponent implements OnInit {
         this.flowKey = "EMCSWorkFlow"
         break;
       case 'UploadResultComponent':
-        this.approveComponent = UpdateVoucherComponent; // detailComponent
+        this.approveComponent = VoucherDetailComponent; // detailComponent
+        this.bonusComponent = UpdateVoucherComponent; //This is bonus Component
         this.checkCondition = "IsPublish";//condition Completed
         this.engineApi.decisionList = [{ name: 'Agree', value: 'Yes' }]; //List conditions in dropdownlist
         this.flowKey = "EMCSWorkFlow"

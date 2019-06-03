@@ -93,7 +93,7 @@
     "ArrivalNoticeDay": "Day to notice"
   },
   "VoucherDetailComponent": {
-    "TITLE": "Voucher Requistion",
+    "TITLE": "Voucher Detail",
     "Manual": "Manual",
     "Method": "Method",
     "Department": "Department",

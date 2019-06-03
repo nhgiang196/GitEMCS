@@ -1,3 +1,105 @@
-<p>
-  update-voucher works!
-</p>
+<div class="wrapper wrapper-updatecontent">
+  <div class="ibox-content" >
+      <!-- [ngClass]=" {'sk-loading': true}"
+    <div class="sk-spinner sk-spinner-wave">
+      <div class="sk-rect1"></div>
+      <div class="sk-rect2"></div>
+      <div class="sk-rect3"></div>
+      <div class="sk-rect4"></div>
+      <div class="sk-rect5"></div>
+    </div> -->
+    <form name="subForm" #subForm="ngForm">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">{{'VoucherComponent.Temparature' | translate}}</label>
+          <div class="col-sm-4">
+            <input required type="number" class="form-control" [(ngModel)]="this.Profile.Temparature"
+              name="Temparature" #Temparature="ngModel">
+          </div>
+          <label class="col-sm-2 control-label">{{'VoucherComponent.Humidity' | translate}}</label>
+          <div class="col-sm-4">
+            <input required type="number" class="form-control" [(ngModel)]="this.Profile.Humidity"
+              name="Humidity" #Humidity="ngModel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">{{'VoucherComponent.Passed' | translate}}</label>
+          <div class="col-sm-4">
+            <div class="i-checks"><label>
+                <input type="checkbox" value="true" class="form-control" [(ngModel)]="this.Profile.Passed"
+                  name="Passed" #Passed="ngModel"> <i></i>
+                {{'Button.Yes' | translate}} </label>
+            </div>
+          </div>
+          <label class="col-sm-2 control-label">{{'Upload.UploadFile' | translate}}</label>
+          <div class="col-sm-4">
+            <div class="from-group">
+              <div class="fileinput fileinput-new" data-provides="fileinput">
+                <span class=" col-sm-12 btn btn-default btn-file"><span class="fileinput-new">Select file</span>
+                  <span class="fileinput-exists">Change</span>
+                  <input required type="file" name="..." id="fileupload"
+                    class="col-sm-12 btn btn-default btn-file"
+                    (change)="handleFileInput($event.target.files)" /></span>
+                <span class="fileinput-filename" [ngClass]=" {'fileinput-new': this.file == null}"
+                  style="text-overflow: ellipsis; width: 200px; overflow: hidden;white-space: nowrap;">
+                </span>
+                <a class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">{{'VoucherComponent.Remark' | translate}}</label>
+          <div class="col-sm-8"><textarea type="text" class="form-control" [(ngModel)]="this.Profile.Remark"
+              name="Remark1" #Remark="ngModel"></textarea></div>
+          <div class="col-sm-2"><button type="button form-control" class="btn btn-primary" (click)="addDetail()"
+              [disabled]="subForm.invalid"><i class="fa fa-plus"></i> {{'Button.Add' | translate}}</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="form-horizontal">
+          <div class="hr-line-dashed"></div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <table [ngClass]=" {'sk-loading': loading}"
+                class="table table-bordered table-hover table-stripped table-responisve text-center">
+                <thead>
+                  <tr>
+                    <th>{{'Upload.FileName' | translate}}</th>
+                    <th>{{'Upload.Name' | translate}}</th>
+                    <th>{{'VoucherComponent.Remark' | translate}}</th>
+                    <th>{{'VoucherComponent.Temparature' | translate}}</th>
+                    <th>{{'VoucherComponent.Humidity' | translate}}</th>
+                    <th>{{'VoucherComponent.Passed' | translate}}</th>
+                    <th>{{'Button.Action' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of this.choosenEntity.Profiles">
+                  <tr>
+                    <td style="text-align: left;text-overflow: ellipsis; width: 200px; overflow: hidden"> <a
+                        (click)="onGetFile(item.FileResult)">{{item.FileResult}}</a></td>
+                    <td style="text-align: left; text-overflow: ellipsis; width: 200px; overflow: hidden">
+                      {{item.Name}}</td>
+                    <td style="text-align: left">{{item.Remark}}</td>
+                    <td style="text-align: left">{{item.Temparature}}</td>
+                    <td style="text-align: left">{{item.Humidity}}</td>
+                    <td style="text-align: left">{{item.Passed}}</td>
+                    <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteProfiles(item)"><i
+                          class="fa fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+  </div>
+</div>

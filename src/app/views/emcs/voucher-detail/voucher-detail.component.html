@@ -9,7 +9,7 @@
         Lab Equipments
       </li>
       <li class="active">
-        <strong> Voucher Requisition Detail</strong>
+        <strong> Voucher Detail</strong>
       </li>
     </ol>
   </div>
@@ -87,8 +87,8 @@
                     {{'VoucherDetailComponent.Manual' | translate}}
                   </h2>
                   <p class="mbr-fonts-style text1 mbr-text display-6">
-                    <a class="mbr-fonts-style text1 mbr-text display-6"
-                      (click)="onGetFile(list.header.Manuals)">Click Here To Download Manual <br></a></p>
+                    <a class="mbr-fonts-style text1 mbr-text display-6" (click)="onGetFile(list.header.Manuals)">Click
+                      Here To Download Manual <br></a></p>
                 </div>
               </div>
             </div>
@@ -182,9 +182,10 @@
     </div>
   </div>
   <div class=" wrapper">
-    <div [hidden]="engineApi.hiddenApprove">
+    <div [hidden]="list.header.State!='S' || list.header.State!='P'">
       <div class="pull-right">
-        <app-start-process flowKey="EMCSWorkFlow" docId={{list.header.VoucherID}} userChecklist="LeaderCheckList"></app-start-process>
+        <app-start-process flowKey="EMCSWorkFlow" docId={{list.header.VoucherID}} userChecklist="LeaderCheckList">
+        </app-start-process>
       </div>
       <!-- set for list user's check -->
       <app-check-list flowKey="EMCSWorkFlow"></app-check-list>
