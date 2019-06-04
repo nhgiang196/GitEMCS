@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Requisition, Profile } from 'src/app/models/EMCSModels';
 import { EngineService } from 'src/app/services/engine.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,9 @@ const NodeApiUrl = "/engine-file/";
 })
 export class UpdateVoucherComponent implements OnInit {
 
+
+  @Input() voucherid: any;
+
   constructor(
     public engineApi: EngineService,
     private toastr: ToastrService,
@@ -27,7 +30,8 @@ export class UpdateVoucherComponent implements OnInit {
   ) { }
 
 
-  list: { Departments: any, Equipments: any[], Data?: any }; //lists return after Get Data
+
+  list: { header: any, detail: any[] }; //lists return after Get Data
   /**init */
   operationResult: any;
   Profile: Profile; // Use to add to Requisition.Profiles
@@ -43,7 +47,6 @@ export class UpdateVoucherComponent implements OnInit {
   alertoptions: any = {};
   loading = false;
   Status = ''; //N: New, M: Modify, X: Delete
-  searchParams: { Department: string, Type: string, Year: string, Status: string }; //search params
   CheckMonth: string;
   CheckDate: number;
   isValid: boolean = true;
@@ -56,6 +59,10 @@ export class UpdateVoucherComponent implements OnInit {
 
   /************************************Init ****************************************************/
   ngOnInit() {
+    this.list = { header: {}, detail: [] };
+
+
+
     this.auth.nagClass.emcsViewToogle = true; //nag-toogle
     this.loading = false;
     this.choosenEntity = {
@@ -67,45 +74,34 @@ export class UpdateVoucherComponent implements OnInit {
       VoucherID: '', FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
     } //??
     this.fileName = '';
-    this.searchParams = { Department: this.auth.currentUser.Department, Type: '', Year: '', Status: '' }; //search params
-    this.route.params.subscribe(params => {
-      this.fnShowEdit(params['businessKey']);
-    });
-   
+    // this.route.params.subscribe(params => {
+    //   this.fnShowEdit(params['businessKey']);
+    // });
+
     this.lsVoucher = null
-    this.list = { Departments: [], Equipments: [] };//lists return after Get Data
-    this.getBasic();
     $('#fileupload').val('');
     this.flowKey = "EMCSWorkFlow";
     this.userChecklist = "LeaderCheckList";
     this.disableButton = true;
-
-
+    this.getData();
   }
 
-  private getBasic() {
-    this.api.getBasic("Department", this.lang).subscribe((res) => {
-      if (res.length >= 0) {
-        this.list.Departments = res;
-      }
-      else this.toastr.error("Failed load Department", "Error");
-    })
-    this.api.getBasic("Equipment", this.auth.currentUser.Department).subscribe((res) => {
-      if (res.length >= 0) {
-        this.list.Equipments = [];
-        res.forEach(element => {
-          if (element.Department == this.auth.currentUser.Department || this.auth.isLabUser())
-            this.list.Equipments.push(element);
-        });
-      }
-      else {
-        this.toastr.error("Failed load Equipments", "Error");
-
-      }
-    })
-    if (this.list.Departments == null || this.list.Equipments == null)
-      this.loading = false;
+  getData() {
+    this.route.params.subscribe(params => {
+      this.api.findVoucher(this.voucherid || params['businessKey']).subscribe((res) => {
+        console.log(res);
+        debugger;
+        this.list.header = res.Header[0];
+        this.list.detail = res.Detail;
+        if (res.Header[0].State.trim() == "N" || res.Header[0].State.trim() == "M") {
+          this.engineApi.hiddenApprove = false; //Show submit button when state is N, M
+        } else {
+          this.engineApi.hiddenApprove = true; //Hidden Submit button when voucher submitted already
+        }
+      })
+    });
   }
+
 
   /***********************************Functions ***********************************/
   handleFileInput(files: FileList) {
@@ -131,19 +127,6 @@ export class UpdateVoucherComponent implements OnInit {
 
     this.choosenEntity.Profiles.push(this.Profile);
     this.fileName = '';
-    this.Profile = {
-      VoucherID: '',
-      FileResult: '',
-      Name: '',
-      EQID: '',
-      Temparature: '',
-      Humidity: '',
-      Passed: null,
-      UploadBy: '',
-      Stamp: null,
-      Remark: '',
-      State: '',
-    }
     $('#fileupload').val('');
     this.file = null;
 
@@ -253,6 +236,8 @@ export class UpdateVoucherComponent implements OnInit {
     })
     this.DisableButton();
   }
+
+
   fnAdd() {
     this.Status = 'N',
       this.choosenEntity.EQID = '';
