@@ -54,11 +54,12 @@ export const ROUTES: Routes = [
     path: '', component: BlankComponent,
     children: [
       // { path: 'landingView', component: LandingViewComponent },
-      { path: 'login', component: LoginComponent } ,
+      { path: 'login', component: LoginComponent },
+      { path: '**', component: NotFoundComponent }
+
       // { path: '404', component: NotFoundComponent }
     ]
   },
   // Handle all other routes
-  { path: '**', component: NotFoundComponent }
 
 ];
