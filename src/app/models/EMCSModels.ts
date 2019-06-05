@@ -59,10 +59,10 @@ export class PlanTimeJob {
 }
 
 export class Profile {
-  VoucherID: string
-  FileResult: string
-  Name: string
-  EQID: string
+  VoucherID?: string
+  FileResult?: string
+  Name?: string
+  EQID?: string
   Temparature?: string
   Humidity?: string
   Passed?: boolean
@@ -70,6 +70,7 @@ export class Profile {
   Stamp?: Date
   Remark?: string
   State?: string
+
 
 }
 
@@ -79,11 +80,11 @@ export class Requisition {
   State: string
   UserID: string
   Remark: string
-  Profiles?: Profile[]
   Department?: string
   MonthAdjust: number
   YearAdjust: number
   CreateTime?: string
+  Profiles?: Profile[]
 }
 export class Department {
   CostCenter: string
