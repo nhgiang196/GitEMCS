@@ -123,5 +123,6 @@
   "StatusM":"Modified",
   "StatusX":"Deleted",
   "StatusP":"Published",
-  "StatusS":"Submited"
+  "StatusS":"Submited",
+  "VoucherUpdate.TITLE":"Update Voucher Information"
 }
