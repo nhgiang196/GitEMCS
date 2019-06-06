@@ -31,31 +31,30 @@ export class UpdateVoucherComponent implements OnInit {
 
   /**init */
   operationResult: any;
-  Profile: Profile; // Use to add to Requisition.Profiles
+  Profile: Profile;
   actionstatus: string
   //Upload File
   file: File;
-  choosenEntity: Requisition; // choose parrams on edit modal page
+  choosenEntity: any; // choose parrams on edit modal page
   plansHeader: any[] = []; // header columns
   alertoptions: any = {};
-  loading = false;
-  Status = ''; //N: New, M: Modify, X: Delete
   disableButton: boolean;
+
   lang: string = this.trans.currentLang.toString()
 
 
   /************************************Init ****************************************************/
   ngOnInit() {
+
     this.auth.nagClass.emcsViewToogle = true; //nag-toogle
-    this.loading = false;
     this.choosenEntity = {
       VoucherID: null, EQID: null, State: null, Remark: '', YearAdjust: null, MonthAdjust: null, Profiles: [],
       UserID: this.auth.currentUser.Username,
       CreateTime: ''
     } // choosed params on edit modal page
+
     this.Profile = {
-      VoucherID: ''
-      , FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
+      FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
     }
     $('#fileupload').val('');
     this.getData();
@@ -63,8 +62,8 @@ export class UpdateVoucherComponent implements OnInit {
 
   getData() {
     this.route.params.subscribe(params => {
-      this.Profile.VoucherID = this.voucherid || params['businessKey'];
-      this.api.findVoucher(this.voucherid || params['businessKey']).subscribe((res) => {
+      let _voucherid = this.Profile.VoucherID = this.voucherid || params['businessKey']; //is Input VoucherID or ParramVoucherID
+      this.api.findVoucher(_voucherid).subscribe((res) => {
         this.choosenEntity = res.Header[0];
         this.choosenEntity.Profiles = res.Detail;
       })
@@ -89,7 +88,7 @@ export class UpdateVoucherComponent implements OnInit {
   }
 
   fnSave() {
-    this.choosenEntity.State = 'M';
+    debugger;
     this.api.updateVoucher(this.choosenEntity).subscribe((res) => {
       this.operationResult = res
       if (this.operationResult.Success) {

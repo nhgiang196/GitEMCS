@@ -124,5 +124,6 @@
   "StatusX":"Deleted",
   "StatusP":"Published",
   "StatusS":"Submited",
-  "VoucherUpdate.TITLE":"Update Voucher Information"
+  "VoucherUpdate.TITLE":"Update Voucher Information",
+  "VoucherUpdate.SaveNotice":"* Please check information and press save before submit your voucher"
 }

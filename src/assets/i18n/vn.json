@@ -124,5 +124,6 @@
   "StatusP":"Công bố",
   "StatusS":"Đang ký duyệt",
   "Month":"Tháng",
-  "VoucherUpdate.TITLE":"Cập nhật đơn hiệu chuẩn"
+  "VoucherUpdate.TITLE":"Cập nhật đơn hiệu chuẩn",
+  "VoucherUpdate.SaveNotice":"*Vui lòng Save trước khi submit nếu bạn chấp nhận các thông tin trên"
 }

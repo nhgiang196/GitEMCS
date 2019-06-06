@@ -150,7 +150,7 @@
                 </div>
                 <div class="col-sm-12">
                   <!-- TABLE OF RESULT FILE -->
-                  <table [ngClass]=" {'sk-loading': loading}" class="table table-bordered table-responisve">
+                  <table class="table table-bordered table-responisve">
                     <thead>
                       <tr>
                         <th>{{'Upload.FileName' | translate}}</th>
@@ -214,15 +214,14 @@
                 </div>
               </div>
 
-              <div class="ibox">
+              <div class="ibox ibox-footer">
                 <div class="pull-right">
-                  <button type="button" (click)="fnSave()" class="btn btn-info"><i class="fa fa-save"></i>
-                    {{'Button.Save' | translate}}</button>
+                  <div class="text-danger">{{'VoucherUpdate.SaveNotice' | translate}}
+                    <button type="button" (click)="fnSave()" class="btn btn-info"><i class="fa fa-save"></i>
+                      {{'Button.Save' | translate}}</button></div>
+
                 </div>
-
               </div>
-
-
             </div>
           </div>
         </div>
