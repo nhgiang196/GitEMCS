@@ -11,6 +11,7 @@ import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.co
 import { UpdateVoucherComponent } from './update-voucher/update-voucher.component';
 import { VoucherDetailComponent } from './voucher-detail/voucher-detail.component';
 import { EquipmentReportComponent } from './equipment-report/equipment-report.component';
+import { StandardEquipmentComponent } from './standard-equipment/standard-equipment.component';
 @NgModule({
   declarations: [EquipmentManageComponent,
     PlanScheduleComponent,
@@ -18,7 +19,9 @@ import { EquipmentReportComponent } from './equipment-report/equipment-report.co
     VoucherDetailComponent,
     EquipmentDetailComponent,
     UpdateVoucherComponent,
-    EquipmentReportComponent],
+    EquipmentReportComponent,
+    UpdateVoucherComponent,
+    StandardEquipmentComponent],
   imports: [
     CommonModule,
     SharedModule,

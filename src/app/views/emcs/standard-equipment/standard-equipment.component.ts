@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ApiEMCSService } from 'src/app/services/api-ecms.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Equipments, Method, Manual, Department } from 'src/app/models/EMCSModels';
-import { NgForm } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { OperationResult } from 'src/app/helpers/operationResult';
 import { ToastrService } from 'ngx-toastr';
@@ -12,11 +11,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 const TCode: string = 'EMCS-01' // TCode for Add or Update Equipment
 @Component({
-  selector: 'app-equipment-manage',
-  templateUrl: './equipment-manage.component.html',
-  styleUrls: ['./equipment-manage.component.css']
+  selector: 'app-standard-equipment',
+  templateUrl: './standard-equipment.component.html',
+  styleUrls: ['./standard-equipment.component.css']
 })
-export class EquipmentManageComponent implements OnInit {
+export class StandardEquipmentComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   @ViewChild('myInputFile')// set for emtpy file after Close or Reload
@@ -121,7 +120,7 @@ export class EquipmentManageComponent implements OnInit {
 
   /******************************************Functions *******************************************/
   fnSearch() {
-    this.pUserName = (this.pGetall === false ? "" : this.auth.currentUser.Username);
+    this.pUserName = (this.pGetall == false ? "" : this.auth.currentUser.Username);
     this.loading = true;
     /** Refresh grid view */
     this.api.getAllEquipment(this.pAssetID
@@ -171,9 +170,15 @@ export class EquipmentManageComponent implements OnInit {
     this.resetForm();
   }
 
+  //Save Equiment
   fnSave() {
     if (this.actionstatus == 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
+      this.equipment.StandardEQ =
+      [
+        { StandardEQID: '_testSEQID'}
+        ,{StandardEQID: '_testSEQID2'}
+      ]
       this.api.addEquipment(this.equipment).subscribe(res => this.showMessage(res)
       )
     } else if (this.actionstatus == 'Modify') {
@@ -190,7 +195,7 @@ export class EquipmentManageComponent implements OnInit {
     } else
       this.toastr.error(operationResult.Message, operationResult.Caption);
     this.fnSearch();
-    $("#closeBtn").click();
+    // $("#closeBtn").click();
   }
   /******************************************On change event *******************************************/
   onUploadFile(type) {
