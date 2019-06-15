@@ -22,6 +22,7 @@ import { EquipmentDetailComponent } from './views/emcs/equipment-detail/equipmen
 import { NotFoundComponent } from './components/common/admin/not-found/not-found.component';
 import { VoucherDetailComponent } from './views/emcs/voucher-detail/voucher-detail.component';
 import { EquipmentReportComponent } from './views/emcs/equipment-report/equipment-report.component';
+import { StandardEquipmentComponent } from './views/emcs/standard-equipment/standard-equipment.component';
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -48,7 +49,8 @@ export const ROUTES: Routes = [
       { path: 'voucherRequisitionView', component: VoucherRequisitionComponent, canActivate: [AuthGuard] },
       { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
       { path: 'EquipmentView/:EQID', component: EquipmentDetailComponent },//Open detail form Approve by Key
-      { path: 'VoucherView/:businessKey', component: VoucherDetailComponent }//Open detail form Approve by Key
+      { path: 'VoucherView/:businessKey', component: VoucherDetailComponent },//Open detail form Approve by Key
+      { path: 'NonAdjustEQView', component: StandardEquipmentComponent }//Open detail form Approve by Key
 
     ]
   },

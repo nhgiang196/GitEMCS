@@ -187,7 +187,7 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
           this.operationResult = res
           if (this.operationResult.Success) {
             this.toastr.success(this.operationResult.Message, this.operationResult.Caption);
-            $('#btnClose').click();
+            $('#closeBtn').click();
             this.fnSearch();
           }
           else
@@ -296,11 +296,9 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
 
   fnShowEdit(item) { //open modal
     this.Status = 'M';
-    console.log(this.choosenEntity);
     this.api.findVoucher(item.VoucherID).subscribe((res) => {
       this.choosenEntity = res.Header[0];
       this.choosenEntity.Profiles = res.Detail;
-      console.log(this.choosenEntity);
     })
     this.DisableButton();
   }

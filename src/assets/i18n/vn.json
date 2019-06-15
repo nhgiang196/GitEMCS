@@ -15,6 +15,7 @@
   "CommandTree": {
     "Dashboard": "Trang đầu",
     "LabEquipment": "Thiết Bị Phòng Lab",
+    "StandardEquipment": "Thiết bị ngoại vi",
     "EQMana": "Quản Lý Thiết Bị",
     "Planning": "Kế Hoạch Hiệu Chuẩn",
     "Voucher": "Đơn Hiệu Chuẩn"

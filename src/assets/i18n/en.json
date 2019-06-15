@@ -14,7 +14,8 @@
   },
   "CommandTree": {
     "Dashboard": "Dash board",
-    "LabEquipment": "Lab Equipment",
+    "LabEquipment": "Lab Equipments",
+    "StandardEquipment":"Standard Equipments",
     "EQMana": "Equipment Management",
     "Planning": "Planning Schedule",
     "Voucher": "Voucher Requistion"
