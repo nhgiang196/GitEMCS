@@ -10,13 +10,15 @@ import { AdminModule } from 'src/app/components/common/admin/admin.module';
 import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.component';
 import { UpdateVoucherComponent } from './update-voucher/update-voucher.component';
 import { VoucherDetailComponent } from './voucher-detail/voucher-detail.component';
+import { EquipmentReportComponent } from './equipment-report/equipment-report.component';
 @NgModule({
   declarations: [EquipmentManageComponent,
     PlanScheduleComponent,
     VoucherRequisitionComponent,
     VoucherDetailComponent,
     EquipmentDetailComponent,
-    UpdateVoucherComponent],
+    UpdateVoucherComponent,
+    EquipmentReportComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -121,7 +121,7 @@ export class EquipmentManageComponent implements OnInit {
 
   /******************************************Functions *******************************************/
   fnSearch() {
-    this.pUserName = (this.pGetall == false ? "" : this.auth.currentUser.Username);
+    this.pUserName = (this.pGetall === false ? "" : this.auth.currentUser.Username);
     this.loading = true;
     /** Refresh grid view */
     this.api.getAllEquipment(this.pAssetID

@@ -21,6 +21,7 @@ import { EquipmentManageComponent } from './views/emcs/equipment-manage/equipmen
 import { EquipmentDetailComponent } from './views/emcs/equipment-detail/equipment-detail.component';
 import { NotFoundComponent } from './components/common/admin/not-found/not-found.component';
 import { VoucherDetailComponent } from './views/emcs/voucher-detail/voucher-detail.component';
+import { EquipmentReportComponent } from './views/emcs/equipment-report/equipment-report.component';
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -45,6 +46,7 @@ export const ROUTES: Routes = [
       { path: 'EQManageView', component: EquipmentManageComponent, canActivate: [AuthGuard] },
       { path: 'planScheduleView', component: PlanScheduleComponent, canActivate: [AuthGuard] },
       { path: 'voucherRequisitionView', component: VoucherRequisitionComponent, canActivate: [AuthGuard] },
+      { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
       { path: 'EquipmentView/:EQID', component: EquipmentDetailComponent },//Open detail form Approve by Key
       { path: 'VoucherView/:businessKey', component: VoucherDetailComponent }//Open detail form Approve by Key
 
@@ -55,9 +57,8 @@ export const ROUTES: Routes = [
     children: [
       // { path: 'landingView', component: LandingViewComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
       { path: '**', component: NotFoundComponent }
-
-      // { path: '404', component: NotFoundComponent }
     ]
   },
   // Handle all other routes

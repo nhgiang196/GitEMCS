@@ -8563,3 +8563,10 @@ body.md-skin {
   vertical-align: middle;
 }
 
+@media print{
+  
+  .theme-config{
+    display: none;
+  }
+
+}
