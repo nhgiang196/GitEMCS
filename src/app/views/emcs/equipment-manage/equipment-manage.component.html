@@ -37,23 +37,19 @@
               <div class="col-xs-3">
                 <div class="form-group">
                   <label class="control-label" for="order_id">{{ 'EQComponent.AssetID' | translate }}</label>
-                  <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pAssetID">
+                  <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pAssetID" name="pAssetID">
                 </div>
               </div>
 
               <div class="col-xs-3">
                 <div class="form-group">
                   <label class="control-label" for="order_id">{{ 'EQComponent.EQName' | translate }}</label>
-                  <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pEQName">
+                  <input type="text" class="form-control" autocomplete="off" [(ngModel)]="pEQName" name="pEQName">
                 </div>
               </div>
-
-              <div class="col-xs-4">
+              <div class="col-xs-3">
                 <div class="form-group">
                   <label class="control-label" for="order_id">{{ 'EQComponent.Department' | translate }}</label>
-                  <!-- <ng-select [items]="list.Equipments  " bindLabel="name" bindValue="id" #EQID="ngModel"
-                            [(ngModel)]="choosenEntity.EQID" name="EQID">
-                          </ng-select> -->
                   <ng-select class="custom" [items]="lsDepartment" [(ngModel)]="pDepartment" bindLabel="name"
                     bindValue="id"> </ng-select>
                 </div>
@@ -66,7 +62,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <div class="checkbox">
-                  <input type="checkbox" id="checkbox1" style="margin-left: 5px;" [(ngModel)]="this.pGetall">
+                  <input type="checkbox" id="checkbox1" style="margin-left: 5px;" [(ngModel)]="pGetall" name="pGetall">
                   <label class="control-label" for="checkbox1">
                     {{ 'EQComponent.GetAll' | translate }}
                   </label>
@@ -97,9 +93,9 @@
             <div class="sk-rect5"></div>
           </div>
           <div class="ibox-title">
-            <h5>Thiết bị hiệu chuẩn</h5>         
-            
-            <div class="ibox-tools">              
+            <h5>Thiết bị hiệu chuẩn</h5>
+
+            <div class="ibox-tools">
               <a class="collapse-link" data-toggle="collapse" data-parent="#accordion" href="myCollapse2">
                 <i class="fa fa-chevron-up"></i>
               </a>
@@ -124,15 +120,13 @@
                     <th>{{ 'EQComponent.ProcessDepartment' | translate }}</th>
                     <th>{{ 'EQComponent.UsedDate' | translate }}</th>
                     <th>{{ 'EQComponent.Author' | translate }}</th>
-
-
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of lsEquipments">
                     <td>
                       <a [routerLink]="['/EquipmentView/',item.EQID]"><button class="btn btn-default btn-xs"><i
-                            class="fa fa-eye"></i></button></a>
+                          class="fa fa-eye"></i></button></a>
                       <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle">
                           <i class="fa fa-list"></i><span class="caret"></span>
@@ -257,12 +251,7 @@
                 <label class="control-label" for="order_id">{{ 'EQComponent.AdjustType' | translate }}</label>
                 <div class="checkbox m-r-xs">
                   <div class="radio">
-                    <input type="radio" name="AdjustType" id="AdjustType1" value="I" [(ngModel)]="equipment.AdjustType"
-                      checked="">
-                    <label for="AdjustType1"> {{'EQComponent.AdjustType_I' | translate}} </label>
-                  </div>
-                  <div class="radio">
-                    <input type="radio" name="AdjustType" id="AdjustType2" value="N" [(ngModel)]="equipment.AdjustType">
+                    <input checked="" type="radio" name="AdjustType" id="AdjustType2" value="N" [(ngModel)]="equipment.AdjustType">
                     <label for="AdjustType2"> {{'EQComponent.AdjustType_N' | translate}} </label>
                   </div>
                   <div class="radio">
@@ -280,17 +269,34 @@
             <div class="col-sm-3">
               <div class="form-group">
                 <label class="control-label" for="order_id">{{ 'EQComponent.Frequency' | translate }}</label>
-                <select [(ngModel)]="equipment.Frequency" class="form-control form-control">
+                <select [(ngModel)]="equipment.Frequency" class="form-control form-control" name="Frequency">
                   <option *ngFor="let num of  [].constructor(12); let i = index" [value]="i+1"> {{i+1}} {{'Month'| translate}}</option>
                 </select>
 
               </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <div class="form-group">
                 <label class="control-label">{{ 'EQComponent.Remark' | translate }}</label>
                 <textarea cols="3" class="form-control" [(ngModel)]="equipment.Remark" name="Remark" #Remark="ngModel"
                   autocomplete="off"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label>Multiselect with custom bindings</label>
+                  <ng-select [items]="lsStandardEQ"
+                             bindLabel="name"
+                             bindValue="id"
+                             [multiple]="true"
+                             placeholder="Select cities"
+                             [(ngModel)]="StandardListEQ"
+                             (change)="test(StandardListEQ)">
+                  </ng-select>
+                  <p>
+                      Selected cities: {{StandardListEQ}}
+                  </p>
+
               </div>
             </div>
             <div class="col-sm-6">
@@ -379,6 +385,9 @@
                 </tbody>
               </table>
             </div>
+
+
+
           </div>
         </div>
         <div class="modal-footer">

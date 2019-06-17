@@ -35,8 +35,8 @@
         <a (click)="authService.nagClass.emcsViewToogle=!authService.nagClass.emcsViewToogle"    data-toggle="dropdown" class="dropdown-toggle" ><i class="fa fa-flask"></i><span
             class="nav-label">{{ 'CommandTree.LabEquipment' | translate }}</span><span class="fa arrow"></span></a>
         <ul  class="nav nav-second-level collapse" [ngClass]="{in: authService.nagClass.emcsViewToogle}">
-          <li ><a [routerLink]="['/EQManageView']"
-              >{{ 'CommandTree.EQMana' | translate }}</a></li>
+          <li ><a [routerLink]="['/EQManageView']">{{ 'CommandTree.EQMana' | translate }}</a></li>
+          <li ><a [routerLink]="['/NonAdjustEQView']">{{ 'CommandTree.StandardEquipment' | translate }}</a></li>
           <li ><a [routerLink]="['/planScheduleView']">{{ 'CommandTree.Planning' | translate }}</a></li>
           <li ><a [routerLink]="['/voucherRequisitionView']">{{ 'CommandTree.Voucher' | translate }}</a></li>
         </ul>

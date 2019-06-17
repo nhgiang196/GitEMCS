@@ -69,7 +69,9 @@ export class EquipmentManageComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   lsDepartment: Observable<Department[]>;
+  lsStandardEQ: any;
 
+  StandardListEQ: string[];
   /******************************************Init *******************************************/
   ngOnInit() {
     this.auth.nagClass.emcsViewToogle = true;
@@ -84,16 +86,26 @@ export class EquipmentManageComponent implements OnInit {
       }
       else this.toastr.error("Failed load Department", "Error");
     })
+    this.api.getBasic("StandardEquipments", this.lang).subscribe((res) => {
+      if (res.length >= 0) {
+        // this.lsDepartment = res;
+        console.log("Standard Equipments:", res);
+        this.lsStandardEQ = res;
+
+      }
+      else this.toastr.error("Failed load Department", "Error");
+    })
 
   }
   private resetForm() {
     // if (form != null) ///????
     //   form.resetForm();
+    this.StandardListEQ = [];
     this.equipment = {
       EQID: null, Name: '', AssetID: '', Brand: '', Model: '', UsedDate: null, Stamp: null, UserID: '', State: '', Remark: '',
       Department: this.auth.currentUser.Department,
       ProcessDepartment: '',
-      AdjustType: 'I',
+      AdjustType: 'N',
       Frequency: '3',
       Methods: [],
       Manuals: [],
@@ -120,6 +132,9 @@ export class EquipmentManageComponent implements OnInit {
   }
 
   /******************************************Functions *******************************************/
+  test(StandardListEQ){
+    console.log(StandardListEQ);
+  }
   fnSearch() {
     this.pUserName = (this.pGetall === false ? "" : this.auth.currentUser.Username);
     this.loading = true;

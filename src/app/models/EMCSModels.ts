@@ -17,8 +17,14 @@ export class Equipments {
   Frequency? : string
   Manuals?: Manual[]
   Methods?: Method[]
+  StandardEQs?: StandardEQ[];
 }
 
+export class StandardEQ {
+  EQID?: string;
+  StandardEQID  : string;
+
+}
 export class Manual {
   MethodID?: number
   EQID?: string

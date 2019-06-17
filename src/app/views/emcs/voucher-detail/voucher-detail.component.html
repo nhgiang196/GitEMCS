@@ -131,10 +131,8 @@
                   <th>{{'VoucherDetailComponent.YearAdjust' | translate}}</th>
                   <td>{{list.header.YearAdjust}}</td>
                   <th>Trạng Thái Đơn</th>
-                  <td *ngIf="list.header.State =='S'">Processing</td>
-                  <td *ngIf="list.header.State =='P'">Publish</td>
-                  <td *ngIf="list.header.State =='N' || list.header.State=='M'">Draft</td>
-                  <td *ngIf="list.header.State =='X'">Deleted</td>
+
+                  <td >{{'Status'+list.header.State | translate}} </td>
 
 
                 </tr>
