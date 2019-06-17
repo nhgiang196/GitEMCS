@@ -172,13 +172,14 @@ export class StandardEquipmentComponent implements OnInit {
 
   //Save Equiment
   fnSave() {
+    this.equipment.StandardEQs =
+      [
+        { StandardEQID: '_testSEQID' }
+        , { StandardEQID: '_testSEQID2' }
+      ]
     if (this.actionstatus == 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
-      this.equipment.StandardEQ =
-      [
-        { StandardEQID: '_testSEQID'}
-        ,{StandardEQID: '_testSEQID2'}
-      ]
+
       this.api.addEquipment(this.equipment).subscribe(res => this.showMessage(res)
       )
     } else if (this.actionstatus == 'Modify') {
