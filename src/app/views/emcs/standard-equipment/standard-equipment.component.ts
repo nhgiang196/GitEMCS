@@ -123,9 +123,9 @@ export class StandardEquipmentComponent implements OnInit {
     this.pUserName = (this.pGetall == false ? "" : this.auth.currentUser.Username);
     this.loading = true;
     /** Refresh grid view */
-    this.api.getAllEquipment(this.pAssetID
+    this.api.getAllEquipment(
+      this.pAssetID , 'N' //AdjustType
       , this.pEQName
-      , 'N' //AdjustType
       , this.pDepartment || ''
       , this.pProcessDepartment || ''
       , this.pUserName
@@ -173,11 +173,6 @@ export class StandardEquipmentComponent implements OnInit {
 
   //Save Equiment
   fnSave() {
-    this.equipment.StandardEQs =
-      [
-        { StandardEQID: '_testSEQID' }
-        , { StandardEQID: '_testSEQID2' }
-      ]
     if (this.actionstatus == 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
 
