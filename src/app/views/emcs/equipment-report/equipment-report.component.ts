@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EquipmentReportComponent implements OnInit {
 
   lsEquipments: Equipments[];
-  loading:boolean =true  
+  loading:boolean =true
   lang: string = this.trans.currentLang.toString();
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +22,7 @@ export class EquipmentReportComponent implements OnInit {
   ngOnInit() {
     $('footer').css('visibility','hidden')
     this.route.params.subscribe(params => {
-      this.api.getAllEquipment('','',params['DeptID'],'','',this.lang).subscribe(res=>{
+      this.api.getAllEquipment('','','',params['DeptID'],'','',this.lang).subscribe(res=>{
         this.lsEquipments = res as Equipments[];
         this.loading = false;
       })

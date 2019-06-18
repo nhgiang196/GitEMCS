@@ -26,8 +26,8 @@ export class ApiEMCSService {
   deleteEquipment(entity) {
     return this.http.put(`${ApiUrl}/EQ/DeleteEquipment`, entity);
   }
-  getAllEquipment(AssetID, EQName, Department, ProcessDepartment, UserID, Lang) {
-    return this.http.get(`${ApiUrl}/EQ/GetEquipment?AssetID=${AssetID}&EQName=${EQName}&Department=${Department}&ProcessDepartment=${ProcessDepartment}&UserID=${UserID}&Lang=${Lang}`);
+  getAllEquipment(AssetID,AdjustType, EQName, Department, ProcessDepartment, UserID, Lang) {
+    return this.http.get(`${ApiUrl}/EQ/GetEquipment?AssetID=${AssetID}&AdjustType=${AdjustType}&EQName=${EQName}&Department=${Department}&ProcessDepartment=${ProcessDepartment}&UserID=${UserID}&Lang=${Lang}`);
   }
   getBasic(table, lang: string) {
     return this.http.get<any>(`${ApiUrl}/EQ/GetBasic?table=${table}&lang=${lang}`);
@@ -92,7 +92,6 @@ export class ApiEMCSService {
   updateVoucherState(voucherid: string, state: string) {
     var parram = { VoucherID: voucherid, State: state };
     return this.http.get<OperationResult>(`${ApiUrl}/Voucher/UpdateVoucherState?VoucherID=${voucherid}&State=${state}`);
-
   }
 
 

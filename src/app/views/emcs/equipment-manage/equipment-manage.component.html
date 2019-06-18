@@ -289,14 +289,10 @@
                              bindLabel="name"
                              bindValue="id"
                              [multiple]="true"
-                             placeholder="Select cities"
+                             placeholder="Select "
                              [(ngModel)]="StandardListEQ"
-                             (change)="test(StandardListEQ)">
+                             name="StandardListEQ">
                   </ng-select>
-                  <p>
-                      Selected cities: {{StandardListEQ}}
-                  </p>
-
               </div>
             </div>
             <div class="col-sm-6">

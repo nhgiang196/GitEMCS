@@ -74,7 +74,7 @@ export class StandardEquipmentComponent implements OnInit {
     this.auth.nagClass.emcsViewToogle = true;
     this.resetForm();
     this.loadDepartments();
-    this.fnSearch();
+    // this.fnSearch();
   }
   loadDepartments() {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
@@ -92,7 +92,7 @@ export class StandardEquipmentComponent implements OnInit {
       EQID: null, Name: '', AssetID: '', Brand: '', Model: '', UsedDate: null, Stamp: null, UserID: '', State: '', Remark: '',
       Department: this.auth.currentUser.Department,
       ProcessDepartment: '',
-      AdjustType: 'I',
+      AdjustType: 'N',
       Frequency: '3',
       Methods: [],
       Manuals: [],
@@ -125,6 +125,7 @@ export class StandardEquipmentComponent implements OnInit {
     /** Refresh grid view */
     this.api.getAllEquipment(this.pAssetID
       , this.pEQName
+      , 'N' //AdjustType
       , this.pDepartment || ''
       , this.pProcessDepartment || ''
       , this.pUserName

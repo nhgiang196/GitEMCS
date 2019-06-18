@@ -77,7 +77,7 @@ export class EquipmentManageComponent implements OnInit {
     this.auth.nagClass.emcsViewToogle = true;
     this.resetForm();
     this.loadDepartments();
-    this.fnSearch();
+    // this.fnSearch();
   }
   loadDepartments() {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
@@ -91,7 +91,6 @@ export class EquipmentManageComponent implements OnInit {
         // this.lsDepartment = res;
         console.log("Standard Equipments:", res);
         this.lsStandardEQ = res;
-
       }
       else this.toastr.error("Failed load Department", "Error");
     })
@@ -132,14 +131,12 @@ export class EquipmentManageComponent implements OnInit {
   }
 
   /******************************************Functions *******************************************/
-  test(StandardListEQ){
-    console.log(StandardListEQ);
-  }
   fnSearch() {
     this.pUserName = (this.pGetall === false ? "" : this.auth.currentUser.Username);
     this.loading = true;
     /** Refresh grid view */
     this.api.getAllEquipment(this.pAssetID
+      , this.pEQName
       , this.pEQName
       , this.pDepartment || ''
       , this.pProcessDepartment || ''
@@ -187,6 +184,13 @@ export class EquipmentManageComponent implements OnInit {
   }
 
   fnSave() {
+    this.StandardListEQ.forEach(function (value, index) {
+      this.equipment.StandardEQs[index] = {
+        EQID: this.equipment.EQID || '',
+        StandardEQID: value
+      }
+    })
+    debugger;
     if (this.actionstatus == 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
       this.api.addEquipment(this.equipment).subscribe(res => this.showMessage(res)
