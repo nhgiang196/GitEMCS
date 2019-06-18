@@ -18,7 +18,7 @@
                 <li class="dropdown">
                         <a class="dropdown-toggle count-info">
                             <i class="fa fa-language"></i>
-                            <select #langSelect (change)="translate.use(langSelect.value)">
+                            <select #langSelect (change)="langChanged(langSelect.value); ">
                                 <option *ngFor="let lang of translate.getLangs()" [value]="lang"
                                     [selected]="lang === translate.currentLang">{{ lang }}
                                 </option>

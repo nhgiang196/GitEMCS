@@ -16,21 +16,22 @@ declare var jQuery: any;
 export class TopnavbarComponent implements OnInit {
 
   constructor(private authService: AuthService
-        , public engineApi: EngineService
-        , public translate: TranslateService
-        , private router : Router) {
+    , public engineApi: EngineService
+    , public translate: TranslateService
+    , private router: Router) {
     translate.addLangs(['en', 'vn', 'zh']);
-    translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|vn|zh/) ? (browserLang) : 'en');
+    // translate.use(browserLang.match(/en|vn|zh/) ? (browserLang) : 'en');
+    var localLang = localStorage.getItem('locallanguage');
+    translate.setDefaultLang(localLang);
+    translate.use(localLang);
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      var reloadpath = location.hash.replace('#','');
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate([  reloadpath ]));
+      var reloadpath = location.hash.replace('#', '');
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([reloadpath]));
     })
   }
-
 
 
 
@@ -40,6 +41,12 @@ export class TopnavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.allTasks();
+  }
+
+
+  langChanged(value) {
+    localStorage.setItem('locallanguage', value);
+    this.translate.use(value);
   }
   logOut() {
     this.authService.logout();
