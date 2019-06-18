@@ -104,10 +104,11 @@ export class EquipmentManageComponent implements OnInit {
       EQID: null, Name: '', AssetID: '', Brand: '', Model: '', UsedDate: null, Stamp: null, UserID: '', State: '', Remark: '',
       Department: this.auth.currentUser.Department,
       ProcessDepartment: '',
-      AdjustType: 'N',
+      AdjustType: 'I',
       Frequency: '3',
       Methods: [],
       Manuals: [],
+      StandardEQs: []
     };
     this.manual = {
       FileName: '', Name: '', Version: 0, EQID: '', Stamp: null, Remark: '', MethodID: 0
@@ -169,6 +170,7 @@ export class EquipmentManageComponent implements OnInit {
     this.actionstatus = 'Modify'
     this._checkAssetID = true;
     this.api.getDetailEquipment(item.EQID).toPromise().then((res) => {
+
       this.equipment = res.Header[0];
       this.equipment.Manuals = res.Manuals;
       this.equipment.Methods = res.Methods;
@@ -184,13 +186,16 @@ export class EquipmentManageComponent implements OnInit {
   }
 
   fnSave() {
-    this.StandardListEQ.forEach(function (value, index) {
-      this.equipment.StandardEQs[index] = {
-        EQID: this.equipment.EQID || '',
-        StandardEQID: value
-      }
-    })
     debugger;
+    if (this.StandardListEQ)
+    for (var key in this.StandardListEQ) {
+        this.equipment.StandardEQs.push({
+          EQID: this.equipment.EQID || '',
+          StandardEQID: this.StandardListEQ[key]
+        })
+    }
+
+
     if (this.actionstatus == 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
       this.api.addEquipment(this.equipment).subscribe(res => this.showMessage(res)

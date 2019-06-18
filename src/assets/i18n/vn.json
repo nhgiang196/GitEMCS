@@ -57,7 +57,8 @@
     "Method": "Phương Thức Hiệu Chuẩn",
     "DetailTitle":"Thông Tin Thiết Bị",
     "Stamp":"Dấu",
-    "Today":"Hôm nay"
+    "Today":"Hôm nay",
+    "StandardListEQ":"Sử dụng thiết bị chuẩn khi hiệu chuẩn"
   },
   "VoucherComponent": {
     "TITLE": "Đơn Hiệu Chuẩn",
