@@ -148,7 +148,9 @@
                           <i class="fa fa-list"></i><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a data-target="#myModal" data-toggle="modal" (click)="fnShowEdit(item)">Modify</a></li>
+                          <li><a data-target="#myModal" data-toggle="modal" (click)="fnShowEdit(item)"><i class="fa fa-pencil"></i> Modify</a></li>
+                          <li> <a [routerLink]="['/voucherReportView/',item.VoucherID]">
+                            <i class="fa fa-print"></i> Print</a></li>
                           <li [hidden]="item.State =='S'|| item.State =='P'"><a [swal]="
                               {
                                 title: 'Are you sure?',
@@ -163,6 +165,7 @@
                           <li><a>Others...</a></li>
                         </ul>
                       </div>
+                     
                     </td>
                     <td><span class="label" [ngClass]="{
                         'label-info': ['N','M'].indexOf(item.State)>-1
@@ -411,8 +414,8 @@
             <button type="button" [hidden]="actionstatus!='View'" [disabled]="this.disableButton"
               [disabled]="myForm.invalid" (click)="fnSave()"
               class="btn btn-primary">{{'Button.Save' | translate}}</button>
-            <button type="button" [disabled]="this.disableButton" [disabled]="myForm.invalid" (click)="fnSubmit()"
-              class="btn btn-primary">{{'Button.Submit' | translate}}</button>
+            <!-- <button type="button" [disabled]="this.disableButton" [disabled]="myForm.invalid" (click)="fnSubmit()"
+              class="btn btn-primary">{{'Button.Submit' | translate}}</button> -->
           </div>
         </div>
       </div>

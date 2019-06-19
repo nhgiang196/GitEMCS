@@ -75,6 +75,11 @@ export class ApiEMCSService {
     return this.http.get<any>(`${ApiUrl}/Voucher/FindVoucher?VoucherID=${voucherid}`)
 
   }
+
+  findVoucherReport(voucherid: string) {
+    return this.http.get<any>(`${ApiUrl}/Voucher/FindVoucherReport?VoucherID=${voucherid}`)
+
+  }
   addVoucher(entity) {
     return this.http.post(`${ApiUrl}/Voucher/AddVoucher`, entity);
   }

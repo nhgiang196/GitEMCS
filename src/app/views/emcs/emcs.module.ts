@@ -12,6 +12,7 @@ import { UpdateVoucherComponent } from './update-voucher/update-voucher.componen
 import { VoucherDetailComponent } from './voucher-detail/voucher-detail.component';
 import { EquipmentReportComponent } from './equipment-report/equipment-report.component';
 import { StandardEquipmentComponent } from './standard-equipment/standard-equipment.component';
+import { VoucherReportComponent } from './voucher-report/voucher-report.component';
 @NgModule({
   declarations: [EquipmentManageComponent,
     PlanScheduleComponent,
@@ -21,7 +22,8 @@ import { StandardEquipmentComponent } from './standard-equipment/standard-equipm
     UpdateVoucherComponent,
     EquipmentReportComponent,
     UpdateVoucherComponent,
-    StandardEquipmentComponent],
+    StandardEquipmentComponent,
+    VoucherReportComponent],
   imports: [
     CommonModule,
     SharedModule,

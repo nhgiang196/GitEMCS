@@ -23,6 +23,7 @@ import { NotFoundComponent } from './components/common/admin/not-found/not-found
 import { VoucherDetailComponent } from './views/emcs/voucher-detail/voucher-detail.component';
 import { EquipmentReportComponent } from './views/emcs/equipment-report/equipment-report.component';
 import { StandardEquipmentComponent } from './views/emcs/standard-equipment/standard-equipment.component';
+import { VoucherReportComponent } from './views/emcs/voucher-report/voucher-report.component';
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -60,6 +61,7 @@ export const ROUTES: Routes = [
       // { path: 'landingView', component: LandingViewComponent },
       { path: 'login', component: LoginComponent },
       { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
+      { path: 'voucherReportView/:VoucherId', component: VoucherReportComponent, canActivate: [AuthGuard] },
       { path: '**', component: NotFoundComponent }
     ]
   },
