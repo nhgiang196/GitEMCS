@@ -38,33 +38,29 @@ export class PlanScheduleComponent implements OnInit {
     this.auth.nagClass.emcsViewToogle = true; //nag-toogle
     this.list = { Departments: [], Years: ['2018', '2019', '2020'] }; //lists return after Get Data
     this.choosenEntity = { UserID: this.auth.currentUser.Username, StartTime: new Date(), }; // choosed params on edit modal page
-    this.searchParams = { Department: this.auth.currentUser.Department , Type: '', Year: new Date().getFullYear() }; // search param
-
+    this.searchParams = { Department: this.auth.currentUser.Department, Type: '', Year: new Date().getFullYear() }; // search param
     /** command */
-    this.fnSearch();
     this.getBasic();
 
   }
-
   private getBasic() {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
       if (res.length > 0) {
         this.list.Departments = res;
-        console.log("Get department list:",res);
+        console.log("Get department list:", res);
       }
       else this.toastr.error("Failed load Department", "Error");
     })
     this.api.getBasic("WorkingYear", '').subscribe(res => {
       if (res.length > 0) {
         this.list.Years = res;
-        console.log("Get working year: ",res);
+        console.log("Get working year: ", res);
       }
     })
     if (this.list.Departments == null)
       this.loading = false;
+    else this.fnSearch();
   }
-
-
   /**************************************************Fuctions *************************************************/
   fnSearch() {
     this.loading = true;
