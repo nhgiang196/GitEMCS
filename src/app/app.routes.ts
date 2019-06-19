@@ -50,7 +50,7 @@ export const ROUTES: Routes = [
       { path: 'EQManageView', component: EquipmentManageComponent, canActivate: [AuthGuard] },
       { path: 'planScheduleView', component: PlanScheduleComponent, canActivate: [AuthGuard] },
       { path: 'voucherRequisitionView', component: VoucherRequisitionComponent, canActivate: [AuthGuard] },
-      { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
+        { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
       { path: 'EquipmentView/:EQID', component: EquipmentDetailComponent },//Open detail form Approve by Key
       { path: 'VoucherView/:businessKey', component: VoucherDetailComponent },//Open detail form Approve by Key
       { path: 'NonAdjustEQView', component: StandardEquipmentComponent },//Open detail form Approve by Key
@@ -63,7 +63,7 @@ export const ROUTES: Routes = [
     children: [
       // { path: 'landingView', component: LandingViewComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'equipmentReportView/:DeptID', component: EquipmentReportComponent, canActivate: [AuthGuard] },
+
       { path: 'voucherReportView/:VoucherId', component: VoucherReportComponent, canActivate: [AuthGuard] },
       { path: '**', component: NotFoundComponent }
     ]
