@@ -50,9 +50,9 @@ export class EquipmentDetailComponent implements OnInit {
   GetEQ(EQID: string){
 
     this.api.getDetailEquipment(EQID).toPromise().then((res) => {
-      this.Equipment = res.Header[0];
-      this.Equipment.Manuals = res.Manuals;
-      this.Equipment.Methods = res.Methods;
+      this.Equipment = res[0][0];
+      this.Equipment.Manuals = res[1];
+      this.Equipment.Methods = res[2];
     })
   }
 

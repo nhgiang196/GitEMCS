@@ -157,9 +157,9 @@ export class StandardEquipmentComponent implements OnInit {
     this.actionstatus = 'Modify'
     this._checkAssetID = true;
     this.api.getDetailEquipment(item.EQID).toPromise().then((res) => {
-      this.equipment = res.Header[0];
-      this.equipment.Manuals = res.Manuals;
-      this.equipment.Methods = res.Methods;
+      this.equipment = res[0][0];
+      this.equipment.Manuals = res[1];
+      this.equipment.Methods = res[2];
     })
   }
   fnDelete(item: Equipments) {
