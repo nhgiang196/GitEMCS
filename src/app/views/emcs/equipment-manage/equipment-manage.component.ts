@@ -167,13 +167,22 @@ export class EquipmentManageComponent implements OnInit {
   }
 
   fnEdit(item: Equipments) {
+    this.resetForm();
     this.actionstatus = 'Modify'
     this._checkAssetID = true;
     this.api.getDetailEquipment(item.EQID).toPromise().then((res) => {
+      console.log(res);
 
-      this.equipment = res.Header[0];
-      this.equipment.Manuals = res.Manuals;
-      this.equipment.Methods = res.Methods;
+
+      this.equipment = res[0][0];
+      this.equipment.Manuals = res[1];
+      this.equipment.Methods = res[2];
+      this.StandardListEQ = [];
+      for (var index in res[3]) {
+        this.StandardListEQ.push(res[3][index].StandardEQID);
+      };
+
+
     })
   }
   fnDelete(item: Equipments) {
@@ -186,14 +195,19 @@ export class EquipmentManageComponent implements OnInit {
   }
 
   fnSave() {
-    debugger;
-    if (this.StandardListEQ)
-    for (var key in this.StandardListEQ) {
+
+    if (this.StandardListEQ) //if exists this list
+    {
+      this.equipment.StandardEQs=[];
+      for (var key in this.StandardListEQ) { //then add to choosen Entity StandardEQs
         this.equipment.StandardEQs.push({
           EQID: this.equipment.EQID || '',
           StandardEQID: this.StandardListEQ[key]
         })
+      }
+
     }
+
 
 
     if (this.actionstatus == 'Add') {

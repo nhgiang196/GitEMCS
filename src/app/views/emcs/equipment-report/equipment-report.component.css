@@ -17,20 +17,20 @@
 @media print {
   .footer-report {
     margin-left: 9mm;
-    margin-right: 9mm;   
-    position: fixed;
+    margin-right: 9mm;
+    /* position: fixed; */
     bottom: 20mm;
   }
   .header-report{
     margin-top: 4.5mm;
     margin-left: 9mm;
     margin-right: 9mm;
-    position: fixed;
+    /* position: fixed; */
   }
   .content-report{
     margin-left: 9mm;
     margin-right: 9mm;
-    position: fixed;
+    /* position: fixed; */
     top: 55mm
   }
   #btnPrint{
