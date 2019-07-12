@@ -222,7 +222,10 @@ export class VoucherRequisitionComponent implements OnInit, OnDestroy {
   fnSubmit() {
     let camundaForm = {
       "variables":
-        { "LeaderCheckList": { "value": this.engineApi.lsCheckers } },
+      {
+        "LeaderCheckList": { "value": this.engineApi.lsCheckers },
+        "initiator": { "value": this.auth.currentUser.Username }
+      },
       "businessKey": this.choosenEntity.VoucherID
     }
     switch (this.Status) {

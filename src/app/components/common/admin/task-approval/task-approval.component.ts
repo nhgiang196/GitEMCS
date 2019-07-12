@@ -84,21 +84,12 @@ export class TaskApprovalComponent implements OnInit {
     this.Params = {
       variables: myCheck
     }
-    if (itemSelected.value == 'No') {
-      this.mongo.findCollection({ voucherId: this.camundaTask.businessKey }).subscribe(res => {
-        let r = res as any;
-        myCheck["QCManager"] = { value: r[0].initiator }
-        this.submitCamunda();
-
-      })
-    }else{
-      this.submitCamunda();
-
-    }
+    this.submitCamunda();
 
   }
 
   submitCamunda() {
+    debugger;
     this.engine.completeTask(this.camundaTask.id, this.Params).subscribe(res => {
       if (res === null || res === '') {
         this.toastr.success('Task Complete!', 'Your task already submitted\n Thank you!');
