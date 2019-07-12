@@ -12,14 +12,12 @@ export class AppComponent implements OnInit {
   constructor(private userIdle: UserIdleService,
     private auth: AuthService,
     public translate: TranslateService) {
-      translate.addLangs(['en', 'vn']);
-      translate.setDefaultLang('en');
-
-      const browserLang = translate.getBrowserLang();
-      translate.use(browserLang.match(/en|vn/) ? browserLang : 'en');
+    translate.addLangs(['en', 'vn', 'zh']);
+    translate.setDefaultLang('en');
+    translate.use(localStorage.getItem('locallanguage') || 'en');
 
   }
-  ngOnInit(){
+  ngOnInit() {
 
     //Start watching for user inactivity.
     this.startWatching();

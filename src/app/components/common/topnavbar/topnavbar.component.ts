@@ -19,13 +19,6 @@ export class TopnavbarComponent implements OnInit {
     , public engineApi: EngineService
     , public translate: TranslateService
     , private router: Router) {
-    translate.addLangs(['en', 'vn', 'zh']);
-
-    const browserLang = translate.getBrowserLang();
-    // translate.use(browserLang.match(/en|vn|zh/) ? (browserLang) : 'en');
-    var localLang = localStorage.getItem('locallanguage');
-    translate.setDefaultLang(localLang);
-    translate.use(localLang);
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       var reloadpath = location.hash.replace('#', '');
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>

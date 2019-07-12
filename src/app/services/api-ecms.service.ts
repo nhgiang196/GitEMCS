@@ -14,6 +14,22 @@ export class ApiEMCSService {
   isCheck: boolean;
   constructor(private http: HttpClient,
     private fileService: FileService) { }
+
+  /**
+   * BasicData = {
+   * Departments: [],
+   Equipments * Departments: []
+   * */
+  public BasicData = {
+    Departments: [],
+    Equipments: []
+  }
+
+  ngOnInit(): void {
+
+
+
+  }
   /**
    * Api for Equipment
    */

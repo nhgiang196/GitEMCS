@@ -75,16 +75,17 @@ export class UpdateVoucherComponent implements OnInit {
     var fileName = this.Profile.FileResult = this.helper.getFileNameWithExtension(this.file);
     this.Profile.Name = this.file.name;
     this.choosenEntity.Profiles.push(this.Profile);
-    $('#fileupload').val('');
-    this.file = null;
-    this.Profile = {
-      FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
-    }
-    /**Upload file */
     const formData = new FormData();
     formData.append('fileName', fileName);
     formData.append('file', this.file);
     this.api.uploadFile(formData).subscribe(res => true, err => false);
+
+    this.Profile = {
+      FileResult: '', Name: '', EQID: '', Temparature: '', Humidity: '', Passed: false, UploadBy: '', Stamp: null, Remark: '', State: '',
+    }
+    /**Upload file */
+    $('#fileupload').val('');
+    this.file = null;
   }
 
   fnSave() {
