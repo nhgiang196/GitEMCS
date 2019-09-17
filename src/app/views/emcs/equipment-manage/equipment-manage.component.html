@@ -107,7 +107,7 @@
                 class="fa fa-print"></i></a>
             <div class="table-responsive">
               <table datatable [dtOptions]="helper.dtOptions" [dtTrigger]="dtTrigger"
-                class="table table-bordered table-hover table-stripped table-responisve text-center">
+                class="table table-bordered table-hover table-stripped table-responsive text-center">
                 <thead>
                   <tr>
                     <th>{{ 'Button.Action' | translate }}</th>
@@ -116,7 +116,10 @@
                     <th>{{ 'EQComponent.Brand' | translate }}</th>
                     <th>{{ 'EQComponent.Model' | translate }}</th>
                     <th>{{ 'EQComponent.AdjustType' | translate }}</th>
-                    <th>{{ 'EQComponent.Frequency' | translate }}</th>
+                    <th>{{ 'EQComponent.Manual' | translate }}</th>
+                    <th>{{ 'EQComponent.Method' | translate }}</th>
+                    <th>{{'VoucherComponent.Status' | translate}}</th>
+                    <th>{{ 'EQComponent.Frequency' | translate }}</th>                    
                     <th>{{ 'EQComponent.Department' | translate }}</th>
                     <th>{{ 'EQComponent.ProcessDepartment' | translate }}</th>
                     <th>{{ 'EQComponent.UsedDate' | translate }}</th>
@@ -133,7 +136,10 @@
                           <i class="fa fa-list"></i><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a data-target="#myModal" data-toggle="modal" (click)="fnEdit(item)">Modify</a></li>
+                          <li><a 
+                            data-target="#myModal"                           
+                            data-toggle="modal"
+                            (click)="fnEdit(item)">Modify</a></li>
                           <li><a [swal]="
                                   {
                                     title: 'Are you sure?',
@@ -141,11 +147,9 @@
                                     type: 'warning',
                                     showCancelButton: true,
                                     confirmButtonColor: '#DD6B55',
-                                     confirmButtonText: 'Yes, delete it!',
+                                     confirmButtonText: 'Yes, I will do it!',
                                     closeOnConfirm: false
-                                  }" (confirm)="fnDelete(item)">Delete</a></li>
-                          <li class="divider"></li>
-                          <li><a>Others...</a></li>
+                                  }" (confirm)="fnCancel(item)">Cancel</a></li>
                         </ul>
                       </div>
 
@@ -155,7 +159,18 @@
                     <td>{{item.Brand}}</td>
                     <td>{{item.Model}}</td>
                     <td>{{'EQComponent.AdjustType_'+item.AdjustType | translate}}</td>
-                    <td>{{item.Frequency}}</td>
+                    <td>
+                      <input  type="checkbox" [checked]="item.Manual =='1'" disabled>
+                    </td>
+                    <td>
+                        <input  type="checkbox" [checked]="item.Method =='1'" disabled>
+                    </td>
+                    <td><span class="label" [ngClass]="{
+                      'label-info': item.State=='N'
+                      ,'label-warning':item.State=='M'
+                      ,'label-danger':item.State=='X'
+                      }">{{item.State}}</span></td>
+                    <td >{{item.Frequency}}</td>
                     <td>{{item.Department}}</td>
                     <td>{{item.ProcessDepartment}}</td>
                     <td>{{item.UsedDate}}</td>
@@ -363,7 +378,7 @@
                         <td style="text-align: left"> <a (click)="onGetFile(item.FileName)">{{item.FileName}}</a></td>
                         <td style="text-align: left">{{item.Name}}</td>
                         <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteManualFile(item)"><i
-                              class="fa fa-trash"></i></button></td>
+                              class="fa fa-trash" id="btnManualTrash"></i></button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -383,7 +398,7 @@
                         <td style="text-align: left"> <a (click)="onGetFile(item.FileName)">{{item.FileName}}</a></td>
                         <td style="text-align: left">{{item.Name}}</td>
                         <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteMethodFile(item)"><i
-                              class="fa fa-trash"></i></button></td>
+                              class="fa fa-trash" id="btnMethodTrash"></i></button></td>
                       </tr>
                     </tbody>
                   </table>

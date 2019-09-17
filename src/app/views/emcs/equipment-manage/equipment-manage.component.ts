@@ -40,6 +40,8 @@ export class EquipmentManageComponent implements OnInit {
   equipment: Equipments
   method: Method;
 
+  ACTION_STATUS: string;
+
   fileName: string;
   operationResult: OperationResult;
   lsEquipments: Equipments[];
@@ -53,7 +55,6 @@ export class EquipmentManageComponent implements OnInit {
     Getall: boolean;
   }
 
-  actionstatus: string
 
   pAssetID: string;
   pEQName: string;
@@ -77,6 +78,7 @@ export class EquipmentManageComponent implements OnInit {
     this.auth.nagClass.emcsViewToogle = true;
     this.resetForm();
     this.loadDepartments();
+    this.loadStandardEquipments();
     // this.fnSearch();
   }
   loadDepartments() {
@@ -85,16 +87,16 @@ export class EquipmentManageComponent implements OnInit {
         this.lsDepartment = res;
       }
       else this.toastr.error("Failed load Department", "Error");
-    })
+    }) 
+  }
+  loadStandardEquipments(){
     this.api.getBasic("StandardEquipments", this.lang).subscribe((res) => {
       if (res.length >= 0) {
-        // this.lsDepartment = res;
-        console.log("Standard Equipments:", res);
         this.lsStandardEQ = res;
       }
-      else this.toastr.error("Failed load Department", "Error");
+      else this.toastr.error("Failed load StandardEquipments", "Error");
     })
-
+ 
   }
   private resetForm() {
     // if (form != null) ///????
@@ -168,12 +170,9 @@ export class EquipmentManageComponent implements OnInit {
 
   fnEdit(item: Equipments) {
     this.resetForm();
-    this.actionstatus = 'Modify'
+    this.ACTION_STATUS = 'Modify'
     this._checkAssetID = true;
     this.api.getDetailEquipment(item.EQID).toPromise().then((res) => {
-      console.log(res);
-
-
       this.equipment = res[0][0];
       this.equipment.Manuals = res[1];
       this.equipment.Methods = res[2];
@@ -181,16 +180,15 @@ export class EquipmentManageComponent implements OnInit {
       for (var index in res[3]) {
         this.StandardListEQ.push(res[3][index].StandardEQID);
       };
-
-
     })
   }
-  fnDelete(item: Equipments) {
+  fnCancel(item: Equipments) {
+    item.State = (item.State === 'X') ? 'M' : 'X'
     this.api.deleteEquipment(item).subscribe((res) => this.showMessage(res));
   }
   //Open Modal
   fnAdd() {
-    this.actionstatus = 'Add';
+    this.ACTION_STATUS = 'Add';
     this.resetForm();
   }
 
@@ -198,7 +196,7 @@ export class EquipmentManageComponent implements OnInit {
 
     if (this.StandardListEQ) //if exists this list
     {
-      this.equipment.StandardEQs=[];
+      this.equipment.StandardEQs = [];
       for (var key in this.StandardListEQ) { //then add to choosen Entity StandardEQs
         this.equipment.StandardEQs.push({
           EQID: this.equipment.EQID || '',
@@ -208,13 +206,13 @@ export class EquipmentManageComponent implements OnInit {
 
     }
 
-
-
-    if (this.actionstatus == 'Add') {
+    if (this.ACTION_STATUS === 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
+      this.equipment.State = 'N';
       this.api.addEquipment(this.equipment).subscribe(res => this.showMessage(res)
       )
-    } else if (this.actionstatus == 'Modify') {
+    } else if (this.ACTION_STATUS === 'Modify') {
+      this.equipment.State = 'M';
       this.api.updateEquipment(this.equipment).subscribe(res => this.showMessage(res)
       )
     }
@@ -239,7 +237,14 @@ export class EquipmentManageComponent implements OnInit {
     this.api.uploadFile(formData).subscribe(res => {
       this.fileUpload = res;
     }, err => {
-      this.toastr.error(err.Message, err.Caption);
+      this.toastr.error('Can not upload File\n Api upload Error '+ err.Message, 'Error');
+      if(type ==1){
+        $('#btnManualTrash').click();
+      }else{
+        $('#btnMethodTrash').click();
+      }
+       
+      
     });
     //1 for Manual
     if (type === 1) {
@@ -294,10 +299,16 @@ export class EquipmentManageComponent implements OnInit {
   /**Delete Manual Item */
   onDeleteManualFile(item) {
     this.equipment.Manuals.splice(this.equipment.Manuals.indexOf(item), 1);
+    this.api.deleteFile(item.FileName).subscribe(res=>{
+      console.log(res);
+    })
   }
   /**Delete Method Item */
   onDeleteMethodFile(item) {
     this.equipment.Methods.splice(this.equipment.Methods.indexOf(item), 1);
+    this.api.deleteFile(item.FileName).subscribe(res=>{
+      console.log(res);
+    })
   }
 
 }
