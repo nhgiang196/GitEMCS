@@ -291,8 +291,7 @@ export class EquipmentManageComponent implements OnInit {
   }
   /**Download File without RestAPI */
   onGetFile(FileName) {
-    let url: string = '/engine-file/';
-    url += '/' + FileName;
+    let url: string = '/engine-file/'+FileName;
     window.open(url, '_blank');
   }
 
