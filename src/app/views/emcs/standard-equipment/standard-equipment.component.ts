@@ -39,6 +39,8 @@ export class StandardEquipmentComponent implements OnInit {
   equipment: Equipments
   method: Method;
 
+  ACTION_STATUS: string;
+
   fileName: string;
   operationResult: OperationResult;
   lsEquipments: Equipments[];
@@ -52,7 +54,6 @@ export class StandardEquipmentComponent implements OnInit {
     Getall: boolean;
   }
 
-  actionstatus: string
 
   pAssetID: string;
   pEQName: string;
@@ -74,7 +75,6 @@ export class StandardEquipmentComponent implements OnInit {
     this.auth.nagClass.emcsViewToogle = true;
     this.resetForm();
     this.loadDepartments();
-    // this.fnSearch();
   }
   loadDepartments() {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
@@ -124,7 +124,7 @@ export class StandardEquipmentComponent implements OnInit {
     this.loading = true;
     /** Refresh grid view */
     this.api.getAllEquipment(
-      this.pAssetID , 'N' //AdjustType
+      this.pAssetID, 'N' //AdjustType
       , this.pEQName
       , this.pDepartment || ''
       , this.pProcessDepartment || ''
@@ -154,7 +154,7 @@ export class StandardEquipmentComponent implements OnInit {
   }
 
   fnEdit(item: Equipments) {
-    this.actionstatus = 'Modify'
+    this.ACTION_STATUS = 'Modify'
     this._checkAssetID = true;
     this.api.getDetailEquipment(item.EQID).toPromise().then((res) => {
       this.equipment = res[0][0];
@@ -162,28 +162,28 @@ export class StandardEquipmentComponent implements OnInit {
       this.equipment.Methods = res[2];
     })
   }
-  fnDelete(item: Equipments) {
+  fnCancel(item: Equipments) {
+    item.State = (item.State === 'X') ? 'M' : 'X'
     this.api.deleteEquipment(item).subscribe((res) => this.showMessage(res));
   }
   //Open Modal
   fnAdd() {
-    this.actionstatus = 'Add';
+    this.ACTION_STATUS = 'Add';
     this.resetForm();
   }
 
   //Save Equiment
   fnSave() {
-    if (this.actionstatus == 'Add') {
+    if (this.ACTION_STATUS === 'Add') {
       this.equipment.UserID = this.auth.currentUser.Username;
-
+      this.equipment.State = 'N';
       this.api.addEquipment(this.equipment).subscribe(res => this.showMessage(res)
       )
-    } else if (this.actionstatus == 'Modify') {
+    } else if (this.ACTION_STATUS === 'Modify') {
+      this.equipment.State = 'M';
       this.api.updateEquipment(this.equipment).subscribe(res => this.showMessage(res)
       )
     }
-
-
   }
   private showMessage(res: any) {
     var operationResult = res as OperationResult;
@@ -192,7 +192,7 @@ export class StandardEquipmentComponent implements OnInit {
     } else
       this.toastr.error(operationResult.Message, operationResult.Caption);
     this.fnSearch();
-    // $("#closeBtn").click();
+    $("#closeBtn").click();
   }
   /******************************************On change event *******************************************/
   onUploadFile(type) {
@@ -203,7 +203,12 @@ export class StandardEquipmentComponent implements OnInit {
     this.api.uploadFile(formData).subscribe(res => {
       this.fileUpload = res;
     }, err => {
-      this.toastr.error(err.Message, err.Caption);
+      this.toastr.error('Can not upload File\n Api upload Error ' + err.Message, 'Error');
+      if (type == 1) {
+        $('#btnManualTrash').click();
+      } else {
+        $('#btnMethodTrash').click();
+      }
     });
     //1 for Manual
     if (type === 1) {
@@ -250,18 +255,23 @@ export class StandardEquipmentComponent implements OnInit {
   }
   /**Download File without RestAPI */
   onGetFile(FileName) {
-    let url: string = '/engine-file/';
-    url += '/' + FileName;
+    let url: string = '/engine-file/' + FileName;
     window.open(url, '_blank');
   }
 
   /**Delete Manual Item */
   onDeleteManualFile(item) {
     this.equipment.Manuals.splice(this.equipment.Manuals.indexOf(item), 1);
+    this.api.deleteFile(item.FileName).subscribe(res => {
+      console.log(res);
+    })
   }
   /**Delete Method Item */
   onDeleteMethodFile(item) {
     this.equipment.Methods.splice(this.equipment.Methods.indexOf(item), 1);
+    this.api.deleteFile(item.FileName).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }

@@ -104,9 +104,6 @@ export class PlanScheduleComponent implements OnInit {
       this.api.checkItem(param.eqid, param.month.replace('_', ''), param.year).subscribe(res => { });
     }
   }
-  fnClear() {
-
-  }
   fnUndo() {
     var param = this.undoList[this.undoList.length - 1];
     this._UpdateTable(param.month, param.index)

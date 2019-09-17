@@ -116,10 +116,10 @@
                     <th>{{ 'EQComponent.Name' | translate }}</th>
                     <th>{{ 'EQComponent.Brand' | translate }}</th>
                     <th>{{ 'EQComponent.Model' | translate }}</th>
-                    <!-- <th>{{ 'EQComponent.AdjustType' | translate }}</th> -->
-                    <!-- <th>{{ 'EQComponent.Frequency' | translate }}</th> -->
-                    <!-- <th>{{ 'EQComponent.Department' | translate }}</th> -->
-                    <!-- <th>{{ 'EQComponent.ProcessDepartment' | translate }}</th> -->
+                    <th>{{ 'EQComponent.Manual' | translate }}</th>
+                    <th>{{ 'EQComponent.Method' | translate }}</th>
+                    <th>{{'VoucherComponent.Status' | translate}}</th>
+                    <th>{{ 'EQComponent.Frequency' | translate }}</th>   
                     <th>{{ 'EQComponent.UsedDate' | translate }}</th>
                     <th>{{ 'EQComponent.Author' | translate }}</th>
 
@@ -144,11 +144,9 @@
                                     type: 'warning',
                                     showCancelButton: true,
                                     confirmButtonColor: '#DD6B55',
-                                     confirmButtonText: 'Yes, delete it!',
+                                     confirmButtonText: 'Yes, I will do it!',
                                     closeOnConfirm: false
-                                  }" (confirm)="fnDelete(item)">Delete</a></li>
-                          <li class="divider"></li>
-                          <li><a>Others...</a></li>
+                                  }" (confirm)="fnCancel(item)">Cancel</a></li>
                         </ul>
                       </div>
 
@@ -157,10 +155,18 @@
                     <td style="text-align: left">{{item.Name}}</td>
                     <td>{{item.Brand}}</td>
                     <td>{{item.Model}}</td>
-                    <!-- <td>{{item.AdjustType}}</td>
-                    <td>{{item.Frequency}}</td>
-                    <td>{{item.Department}}</td>
-                    <td>{{item.ProcessDepartment}}</td> -->
+                    <td>
+                      <input  type="checkbox" [checked]="item.Manual =='1'" disabled>
+                    </td>
+                    <td>
+                        <input  type="checkbox" [checked]="item.Method =='1'" disabled>
+                    </td>
+                    <td><span class="label" [ngClass]="{
+                      'label-info': item.State=='N'
+                      ,'label-warning':item.State=='M'
+                      ,'label-danger':item.State=='X'
+                      }">{{item.State}}</span></td>
+                    <td >{{item.Frequency}}</td>
                     <td>{{item.UsedDate}}</td>
                     <td>{{item.UserID}}</td>
                   </tr>
@@ -247,10 +253,19 @@
               <div class="form-group">
                 <label class="control-label" for="order_id">{{ 'EQComponent.UsedDate' | translate }}</label>
                 <input type="text" class="form-control" [(ngModel)]="equipment.UsedDate" name="UsedDate" bsDatepicker
-                  required autocomplete="off">
+                  required autocomplete="off" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
               </div>
             </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="control-label" for="order_id">{{ 'EQComponent.Frequency' | translate }}</label>
+                <select [(ngModel)]="equipment.Frequency" class="form-control form-control" name="Frequency">
+                  <option *ngFor="let num of  [].constructor(12); let i = index" [value]="i+1"> {{i+1}}
+                    {{'Month'| translate}}</option>
+                </select>
 
+              </div>
+            </div>
             <div class="col-sm-12">
               <div class="form-group">
                 <label class="control-label">{{ 'EQComponent.Remark' | translate }}</label>
@@ -318,7 +333,7 @@
                   <tr>
                     <td style="text-align: left"> <a (click)="onGetFile(item.FileName)">{{item.FileName}}</a></td>
                     <td style="text-align: left">{{item.Name}}</td>
-                    <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteManualFile(item)"><i
+                    <td><button type="button" class="btn btn-outline btn-danger" id="btnManualTrash" (click)="onDeleteManualFile(item)"><i
                           class="fa fa-trash"></i></button></td>
                   </tr>
                 </tbody>
@@ -338,7 +353,7 @@
                   <tr>
                     <td style="text-align: left"> <a (click)="onGetFile(item.FileName)">{{item.FileName}}</a></td>
                     <td style="text-align: left">{{item.Name}}</td>
-                    <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteMethodFile(item)"><i
+                    <td><button type="button" class="btn btn-outline btn-danger" id="btnMethodTrash" (click)="onDeleteMethodFile(item)"><i
                           class="fa fa-trash"></i></button></td>
                   </tr>
                 </tbody>

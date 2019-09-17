@@ -119,7 +119,7 @@
                     <th>{{ 'EQComponent.Manual' | translate }}</th>
                     <th>{{ 'EQComponent.Method' | translate }}</th>
                     <th>{{'VoucherComponent.Status' | translate}}</th>
-                    <th>{{ 'EQComponent.Frequency' | translate }}</th>                    
+                    <th>{{ 'EQComponent.Frequency' | translate }}</th>
                     <th>{{ 'EQComponent.Department' | translate }}</th>
                     <th>{{ 'EQComponent.ProcessDepartment' | translate }}</th>
                     <th>{{ 'EQComponent.UsedDate' | translate }}</th>
@@ -136,10 +136,7 @@
                           <i class="fa fa-list"></i><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a 
-                            data-target="#myModal"                           
-                            data-toggle="modal"
-                            (click)="fnEdit(item)">Modify</a></li>
+                          <li><a data-target="#myModal" data-toggle="modal" (click)="fnEdit(item)">Modify</a></li>
                           <li><a [swal]="
                                   {
                                     title: 'Are you sure?',
@@ -147,7 +144,7 @@
                                     type: 'warning',
                                     showCancelButton: true,
                                     confirmButtonColor: '#DD6B55',
-                                     confirmButtonText: 'Yes, I will do it!',
+                                    confirmButtonText: 'Yes, I will do it!',
                                     closeOnConfirm: false
                                   }" (confirm)="fnCancel(item)">Cancel</a></li>
                         </ul>
@@ -160,17 +157,17 @@
                     <td>{{item.Model}}</td>
                     <td>{{'EQComponent.AdjustType_'+item.AdjustType | translate}}</td>
                     <td>
-                      <input  type="checkbox" [checked]="item.Manual =='1'" disabled>
+                      <input type="checkbox" [checked]="item.Manual =='1'" disabled>
                     </td>
                     <td>
-                        <input  type="checkbox" [checked]="item.Method =='1'" disabled>
+                      <input type="checkbox" [checked]="item.Method =='1'" disabled>
                     </td>
                     <td><span class="label" [ngClass]="{
                       'label-info': item.State=='N'
                       ,'label-warning':item.State=='M'
                       ,'label-danger':item.State=='X'
                       }">{{item.State}}</span></td>
-                    <td >{{item.Frequency}}</td>
+                    <td>{{item.Frequency}}</td>
                     <td>{{item.Department}}</td>
                     <td>{{item.ProcessDepartment}}</td>
                     <td>{{item.UsedDate}}</td>
@@ -259,7 +256,7 @@
               <div class="form-group">
                 <label class="control-label" for="order_id">{{ 'EQComponent.UsedDate' | translate }}</label>
                 <input type="text" class="form-control" [(ngModel)]="equipment.UsedDate" name="UsedDate" bsDatepicker
-                  #UsedDate="ngModel" required autocomplete="off">
+                  #UsedDate="ngModel" required autocomplete="off" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
               </div>
             </div>
             <div class="col-sm-3">
@@ -316,7 +313,7 @@
 
 
 
-              <div class="col-sm-6">
+                <div class="col-sm-6">
                   <div class="from-group">
                     <label class="control-label" for="order_id">{{ 'EQComponent.UploadFileManual' | translate }}</label>
 
@@ -329,7 +326,8 @@
                         style="text-overflow: ellipsis; width: 200px; overflow: hidden;white-space: nowrap;">
                       </span>
                       <a class="close fileinput-exists" data-dismiss="fileinput" style="float: none" #myInputFile>×</a>
-                      <button type="button" class="btn btn-primary" (click)="onUploadFile(1)"><i class="fa fa-upload"></i>
+                      <button type="button" class="btn btn-primary" (click)="onUploadFile(1)"><i
+                          class="fa fa-upload"></i>
                         {{ 'Button.Upload' | translate }}</button>
                     </div>
                   </div>
@@ -346,7 +344,8 @@
                         style="text-overflow: ellipsis; width: 200px; overflow: hidden;white-space: nowrap;">
                       </span>
                       <a class="close fileinput-exists" data-dismiss="fileinput" style="float: none" #myInputFile2>×</a>
-                      <button type="button" class="btn btn-primary" (click)="onUploadFile(2)"><i class="fa fa-upload"></i>
+                      <button type="button" class="btn btn-primary" (click)="onUploadFile(2)"><i
+                          class="fa fa-upload"></i>
                         {{ 'Button.Upload' | translate }}</button>
                     </div>
                   </div>
@@ -377,8 +376,9 @@
                       <tr>
                         <td style="text-align: left"> <a (click)="onGetFile(item.FileName)">{{item.FileName}}</a></td>
                         <td style="text-align: left">{{item.Name}}</td>
-                        <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteManualFile(item)"><i
-                              class="fa fa-trash" id="btnManualTrash"></i></button></td>
+                        <td><button type="button" class="btn btn-outline btn-danger"
+                            (click)="onDeleteManualFile(item)"><i class="fa fa-trash" id="btnManualTrash"></i></button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -397,8 +397,9 @@
                       <tr>
                         <td style="text-align: left"> <a (click)="onGetFile(item.FileName)">{{item.FileName}}</a></td>
                         <td style="text-align: left">{{item.Name}}</td>
-                        <td><button type="button" class="btn btn-outline btn-danger" (click)="onDeleteMethodFile(item)"><i
-                              class="fa fa-trash" id="btnMethodTrash"></i></button></td>
+                        <td><button type="button" class="btn btn-outline btn-danger"
+                            (click)="onDeleteMethodFile(item)"><i class="fa fa-trash" id="btnMethodTrash"></i></button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

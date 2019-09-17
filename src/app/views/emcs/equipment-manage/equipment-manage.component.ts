@@ -79,7 +79,6 @@ export class EquipmentManageComponent implements OnInit {
     this.resetForm();
     this.loadDepartments();
     this.loadStandardEquipments();
-    // this.fnSearch();
   }
   loadDepartments() {
     this.api.getBasic("Department", this.lang).subscribe((res) => {
