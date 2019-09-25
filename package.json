@@ -26,7 +26,7 @@
     "@types/charm": "^1.0.1",
     "angular-datatables": "^7.0.0",
     "angular-user-idle": "^2.1.2",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "bpmn-js": "^3.4.1",
     "charm": "^1.0.2",
     "core-js": "^2.5.4",
